@@ -12,7 +12,7 @@ from classes.product import Product
 from classes.customerorder import CustomerOrder
 from classes.orderproduct import OrderProduct
 from classes.userlogin import Userlogin
-from classes.horario2Form import Horario2Form
+from classes.order2Form import Order2Form
 
 from datetime import timedelta
 from datetime import datetime
@@ -26,7 +26,7 @@ def gerah(clh):
     return objh
     
 
-def hform(cname=''):
+def hform(cname='',submenu=""):
     global prev_option
     global diahoraselected
     
@@ -113,7 +113,8 @@ def hform(cname=''):
                         cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
                         ulogin=session.get("user"),auto_number=cl.auto_number,
                         objh=objh,selectedcell = diahoraselected,
-                        UnidadeCurric = UnidadeCurric.obj)
+                        UnidadeCurric = UnidadeCurric.obj,
+                        submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)
 

@@ -14,7 +14,7 @@ from classes.userlogin import Userlogin
 
 prev_option = ""
 
-def gformT(cname=''):
+def gformT(cname='',submenu=""):
     global prev_option
     
     #scname = eval(cname)
@@ -134,7 +134,8 @@ def gformT(cname=''):
         return render_template("gformT.html", butshow=butshow, butedit=butedit,
                     cname=cname, 
                     ulogin=session.get("user"),objl=objl,headerl=sbl.header,
-                    desl=sbl.des, attl=sbl.att)
+                    desl=sbl.des, attl=sbl.att,
+                    submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)
 

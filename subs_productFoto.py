@@ -16,7 +16,7 @@ img = ""
 
 
 
-def productFoto(app,cname=''):
+def productFoto(app,cname='',submenu=""):
     global img
     global prev_option
     ulogin=session.get("user")
@@ -115,6 +115,7 @@ def productFoto(app,cname=''):
         return render_template("productform.html", butshow=butshow, butedit=butedit,
                         cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
                         ulogin=session.get("user"),auto_number=cl.auto_number,
-                        img=img)
+                        img=img,
+                        submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)

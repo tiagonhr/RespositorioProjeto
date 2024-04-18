@@ -14,7 +14,7 @@ from classes.userlogin import Userlogin
 
 prev_option = ""
 
-def gform(cname=''):
+def gform(cname='',submenu=""):
     global prev_option
     ulogin=session.get("user")
     if (ulogin != None):
@@ -71,6 +71,7 @@ def gform(cname=''):
                 obj[att] = ""
         return render_template("gform.html", butshow=butshow, butedit=butedit,
                         cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
-                        ulogin=session.get("user"),auto_number=cl.auto_number)
+                        ulogin=session.get("user"),auto_number=cl.auto_number,
+                        submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)

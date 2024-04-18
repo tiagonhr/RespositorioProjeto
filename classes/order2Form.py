@@ -15,7 +15,7 @@ from classes.gclass import Gclass
 
 
 
-class Horario2Form(Gclass):
+class Order2Form(Gclass):
     # Dictionary of objects
     obj = dict()
     lst = list()
@@ -24,26 +24,25 @@ class Horario2Form(Gclass):
     auto_number = 1
     
     # class attributes, identifier attribute must be the first one on the list
-    att = ['code','classEvents', 'selectedDiaHora','horaIni','horaFim']
+    att = ['code','classEvents', 'selectedDiaHora']
     # Class header title
     header = 'horario to form'
     # field description for use in, for example, in input form
-    des = ['code','classEvents', 'selectedDiaHora','horaIni','horaFim']
+    des = ['code','classEvents', 'selectedDiaHora']
     # Constructor: Called when an object is instantiated
-    def __init__(self, code,classEvents, selectedDiaHora,horaIni,horaFim):
+    def __init__(self, code,classEvents, selectedDiaHora):
         #Uncomment in case of auto number on
         if code == 'None':
-            codes = Horario2Form.getatlist('_code')
+            codes = Order2Form.getatlist('_code')
             if codes == []:
                 code = str(1)
             else:
-                code = str(max(map(int,Horario2Form.getatlist('_code'))) + 1)
+                code = str(max(map(int,Order2Form.getatlist('_code'))) + 1)
         # Object attributes
         self.code = code
         self.classEvents = classEvents
         self.selectedDiaHora = self.str2datetimeDiaHora(selectedDiaHora)
-        self.horaIni = horaIni
-        self.horaFim = horaFim
+
         self._eventsdiahseleted = []
         
         self.config_horario()
@@ -54,8 +53,8 @@ class Horario2Form(Gclass):
 
 
         # Add the new object to the Class_horario list
-        Horario2Form.obj[code] = self
-        Horario2Form.lst.append(code)
+        Order2Form.obj[code] = self
+        Order2Form.lst.append(code)
 #%% property
     # Object properties
     # getter methodes
@@ -68,13 +67,7 @@ class Horario2Form(Gclass):
     def classEvents(self):
         return self._classEvents
     # horaIni property getter method
-    @property
-    def horaIni(self):
-        return self._horaIni
-    # horaFim property getter method
-    @property
-    def horaFim(self):
-        return self._horaFim
+   
     # selectedDia property getter method
     @property
     def selectedDia(self):
@@ -101,14 +94,7 @@ class Horario2Form(Gclass):
     def classEvents(self, classEvents):
         self._classEvents = classEvents
     # horaIni property setter method
-    @horaIni.setter
-    def horaIni(self, horaIni):
-        self._horaIni = horaIni
-    # horaFim property setter method
-    @horaFim.setter
-    def horaFim(self, horaFim):
-        self._horaFim = horaFim
-
+    
    
 
 
@@ -163,52 +149,61 @@ class Horario2Form(Gclass):
         self.colunasdia = list()
         for k in range(7):
             self.colunasdia.append(self.diaInicial+ timedelta(k))
-        
+            
+        print(self.diaInicial,self.diaFinal)           
     # Fill matiz from class
     def fillMatiz(self):
         
-        cs=int(self.selectedDiaHora.strftime("%w"))
-        ls=int(self.selectedDiaHora.strftime("%H"))
+        # cs=int(self.selectedDiaHora.strftime("%w"))
+        # ls=int(self.selectedDiaHora.strftime("%H"))
         
-        self.semanaTree = [[''] * 7 for i in range(24)]
+        self.semanaTree = []
 
-        self.horas = []
-        for k in range(24):
-            self.horas.append(k)
+        self.clientes = []
         
         
-        for c in range(7):
-            dia = self.diaInicial+ timedelta(c)
-            for l in range(24):
-                self.semanaTree[l][c] = celulaform(l,c,dia,l)
+        
+        # for c in range(7):
+        #     dia = self.diaInicial+ timedelta(c)
+        #     for l in range(24):
+        #         self.semanaTree[l][c] = celulaform(l,c,dia,l)
                 
-        
+        l=0
+        print (self.classEvents.obj[0])
         for k in self.classEvents.lst:
             evento = self.classEvents.obj[k]
-            diaEvento = datetime.strptime(evento.diahora,'%Y-%m-%d %H:%M:%S').date()
-            diahEvento = datetime.strptime(evento.diahora,'%Y-%m-%d %H:%M:%S')
+            print(evento.code)
+            diaEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S').date()
+            diahEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S')
             
             if diaEvento >= self.diaInicial and diaEvento <= self.diaFinal:
                 
                 c=int(diahEvento.strftime("%w"))
-                l=int(diahEvento.strftime("%H"))
-                if l < self.horaIni:
-                    self.horaIni = l
-                if l> self.horaFim:
-                    self.horaFim = l
-                    
-                self.semanaTree[l][c].codeevent = evento.code 
-                self.semanaTree[l][c].texto = self.text_to_horario(evento) 
+                # l=int(diahEvento.strftime("%H"))
+                # if l < self.horaIni:
+                #     self.horaIni = l
+                # if l> self.horaFim:
+                #     self.horaFim = l
                 
-                if c == cs and l == ls:
-                    self._eventsdiahseleted.append([evento.code,str(evento),len(str(evento))])
+                self.clientes.append(evento.customer_code)
+                self.linha = [""]*7
+                for c in range(7):
+                    dia = diaEvento
+                    self.linha[c] = celulaform(l,c,dia,l)
+                    self.semanaTree.append(self.linha)
+                
+                    self.semanaTree[l][c].codeevent = evento.code 
+                    self.semanaTree[l][c].texto = self.text_to_horario(evento) 
+                
+                # if c == cs and l == ls:
+                #     self._eventsdiahseleted.append([evento.code,str(evento),len(str(evento))])
                     
                 
         
 
       
     def text_to_horario(self,evento):
-        texto = f"{evento.cod_uc} - {evento.cod_turma}- {evento.cod_prof}- {evento.cod_sala} "
+        texto = f"{evento.Code} - {evento.Date} - {evento.customer_code} "
         #print("--------",texto,"---------")
         return texto
        
@@ -261,7 +256,6 @@ class celulaform():
           
 
 
-#%% Teste    
 
       
     

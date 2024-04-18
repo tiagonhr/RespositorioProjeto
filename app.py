@@ -17,6 +17,7 @@ CustomerOrder.read(filename + 'business.db')
 OrderProduct.read(filename + 'business.db')
 Userlogin.read(filename + 'business.db')
 prev_option = ""
+submenu = ""
 app.secret_key = 'BAD_SECRET_KEY'
 
 upload_folder = os.path.join('static', 'ProductFotos')
@@ -47,29 +48,47 @@ def logoff():
 def chklogin():
     return lsub.chklogin()
 
+@app.route("/submenu", methods=["post","get"])
+def getsubm():
+    global submenu
+    submenu = request.args.get("subm")
+    return render_template("index.html", ulogin=session.get("user"),submenu=submenu)
+
 @app.route("/gform/<cname>", methods=["post","get"])
 def gform(cname=''):
-     return gfsub.gform(cname)
+    submenu = request.args.get("subm")
+    return gfsub.gform(cname,submenu)
 
 @app.route("/gformT/<cname>", methods=["post","get"])
 def gformT(cname=''):
-    return gfTsub.gformT(cname)
+    submenu = request.args.get("subm")
+    return gfTsub.gformT(cname,submenu)
 
 @app.route("/hform/<cname>", methods=["post","get"])
 def hform(cname=''):
-    return gfhsub.hform(cname)
+    submenu = request.args.get("subm")
+    return gfhsub.hform(cname,submenu)
 
 
         
 @app.route("/subform/<cname>", methods=["post","get"])
 def subform(cname=""):
-    return gfsubsub.subform(cname)
+    submenu = request.args.get("subm")
+    return gfsubsub.subform(cname,submenu)
 
 
 @app.route("/productform", methods=["post","get"])
 def productFoto():
+    submenu = request.args.get("subm")
     cname = 'Product'
-    return productFotosub.productFoto(app,cname)
+    return productFotosub.productFoto(app,cname,submenu)
+
+@app.route("/order/mapa", methods=["post","get"])
+def ordermapa():
+
+    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+
+
 
     
 if __name__ == '__main__':

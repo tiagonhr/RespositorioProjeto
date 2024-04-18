@@ -14,7 +14,7 @@ from classes.userlogin import Userlogin
 
 prev_option = ""
 
-def subform(cname=""):
+def subform(cname="",submenu=""):
     global prev_option
     tlist = cname.split('_')
     cnames = tlist[0]
@@ -104,6 +104,7 @@ def subform(cname=""):
         return render_template("subform.html", butshow=butshow, butedit=butedit,
                     cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
                     ulogin=session.get("user"),objl=objl,headerl=sbl.header,
-                    desl=sbl.des, attl=sbl.att, auto_number=cl.auto_number)
+                    desl=sbl.des, attl=sbl.att, auto_number=cl.auto_number,
+                    submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)
