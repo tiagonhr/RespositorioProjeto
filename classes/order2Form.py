@@ -169,16 +169,17 @@ class Order2Form(Gclass):
         #         self.semanaTree[l][c] = celulaform(l,c,dia,l)
                 
         l=0
-        print (self.classEvents.obj[0])
+        print ("classEvents.lst",self.classEvents.lst)
         for k in self.classEvents.lst:
             evento = self.classEvents.obj[k]
-            print(evento.code)
-            diaEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S').date()
-            diahEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S')
+            print(evento)
+            # diaEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S').date()
+            # diahEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S')
             
+            diaEvento = evento.date
             if diaEvento >= self.diaInicial and diaEvento <= self.diaFinal:
                 
-                c=int(diahEvento.strftime("%w"))
+                c=int(diaEvento.strftime("%w"))
                 # l=int(diahEvento.strftime("%H"))
                 # if l < self.horaIni:
                 #     self.horaIni = l
@@ -203,7 +204,7 @@ class Order2Form(Gclass):
 
       
     def text_to_horario(self,evento):
-        texto = f"{evento.Code} - {evento.Date} - {evento.customer_code} "
+        texto = f"{evento.code} - {evento.date} - {evento.customer_code} "
         #print("--------",texto,"---------")
         return texto
        
