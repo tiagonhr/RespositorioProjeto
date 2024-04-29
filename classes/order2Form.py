@@ -41,7 +41,9 @@ class Order2Form(Gclass):
         # Object attributes
         self.code = code
         self.classEvents = classEvents
-        self.selectedDiaHora = self.str2datetimeDiaHora(selectedDiaHora)
+        
+
+        self.selectedDiaHora = Order2Form.str2datetimeDiaHora(selectedDiaHora)
 
         self._eventsdiahseleted = []
         
@@ -103,7 +105,7 @@ class Order2Form(Gclass):
 
            
        
-    def str2datetimeDiaHora(self,datestr):
+    def str2datetimeDiaHora(datestr):
         
         if type (datestr) == str:
             datestr = datestr.replace("/", ";")
@@ -128,11 +130,14 @@ class Order2Form(Gclass):
             except:
                 date = datetime.now()
                 
-            # print('str2datetimeDiaHora', date)
+
         else:
             date = datestr
-        
-        date = datetime(date.year, date.month, date.day,date.hour)
+        if type(date) == datetime:
+            date = datetime(date.year, date.month, date.day,date.hour)
+            
+        else:
+             date = datetime(date.year, date.month, date.day)
         return date
     
 
@@ -150,62 +155,44 @@ class Order2Form(Gclass):
         for k in range(7):
             self.colunasdia.append(self.diaInicial+ timedelta(k))
             
-        print(self.diaInicial,self.diaFinal)           
+             
     # Fill matiz from class
     def fillMatiz(self):
         
-        # cs=int(self.selectedDiaHora.strftime("%w"))
-        # ls=int(self.selectedDiaHora.strftime("%H"))
-        
+          
         self.semanaTree = []
 
         self.clientes = []
         
         
-        
-        # for c in range(7):
-        #     dia = self.diaInicial+ timedelta(c)
-        #     for l in range(24):
-        #         self.semanaTree[l][c] = celulaform(l,c,dia,l)
                 
         l=0
-        print ("classEvents.lst",self.classEvents.lst)
+ 
         for k in self.classEvents.lst:
             evento = self.classEvents.obj[k]
-            print(evento)
-            # diaEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S').date()
-            # diahEvento = datetime.strptime(evento.date,'%Y-%m-%d %H:%M:%S')
             
             diaEvento = evento.date
             if diaEvento >= self.diaInicial and diaEvento <= self.diaFinal:
                 
                 c=int(diaEvento.strftime("%w"))
-                # l=int(diahEvento.strftime("%H"))
-                # if l < self.horaIni:
-                #     self.horaIni = l
-                # if l> self.horaFim:
-                #     self.horaFim = l
+
                 
                 self.clientes.append(evento.customer_code)
+
                 self.linha = [""]*7
-                for c in range(7):
-                    dia = diaEvento
-                    self.linha[c] = celulaform(l,c,dia,l)
-                    self.semanaTree.append(self.linha)
                 
-                    self.semanaTree[l][c].codeevent = evento.code 
-                    self.semanaTree[l][c].texto = self.text_to_horario(evento) 
-                
-                # if c == cs and l == ls:
-                #     self._eventsdiahseleted.append([evento.code,str(evento),len(str(evento))])
-                    
-                
+                dia = diaEvento
+                self.linha[c] = celulaform(l,c,dia,l)
+                self.linha[c].codeevent = evento.code 
+                self.linha[c].texto = self.text_to_horario(evento)
+                self.semanaTree.append(self.linha)
+          
         
 
       
     def text_to_horario(self,evento):
         texto = f"{evento.code} - {evento.date} - {evento.customer_code} "
-        #print("--------",texto,"---------")
+       
         return texto
        
     

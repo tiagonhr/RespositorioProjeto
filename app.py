@@ -30,6 +30,7 @@ import subs_gformT as gfTsub
 import subs_hform as gfhsub
 import subs_subform as gfsubsub
 import subs_productFoto as productFotosub
+import subs_mapaOrderform as mapasub
 
 
 @app.route("/")
@@ -85,12 +86,17 @@ def productFoto():
 
 @app.route("/order/mapa", methods=["post","get"])
 def ordermapa():
+    submenu = request.args.get("subm")
+    cname = ''
+    return mapasub.mapaOrderform(app,cname,submenu)
 
+@app.route("/uc", methods=["post","get"])
+def uc():
     return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
 
 
 
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=6001)
     #app.run()
