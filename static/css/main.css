@@ -12,7 +12,7 @@ nav{
     margin: 0;
     padding: 8px;
     height: 100%;
-    background-color: #334a94;
+    background-color: #e9967a;
 
 }
 
@@ -21,7 +21,7 @@ nav{
 }
 
 .button{
-    font-family: Arial;
+    font-family: Roboto;
     font-size: 1em;
     font-style: none;
     color: #ffffff;
@@ -30,12 +30,12 @@ nav{
 }
 
 .button:link{
-    background-color: #334a94;
+    background-color: #004953;
     color: #ffffff;
 }
 
 .button:hover{
-    background-color: lightblue;
+    background-color: #367588;
 }
 
 .dados{
@@ -45,7 +45,7 @@ nav{
 
 .button1{
     font-family: Arial;
-    background-color: #334a94;
+    background-color: #004953;
     font-size: 1em;
     font-style: none;
     color: white;
@@ -59,7 +59,7 @@ nav{
 }
 
 .button1:hover{
-    background-color: lightblue;
+    background-color: #367588;
 }
 
 .button1:disabled{
@@ -82,4 +82,8 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+body {
+  background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.alphacoders.com%2F464%2F464616.jpg&f=1&nofb=1&ipt=1c6a6c3ba6cd5f9a590525a58bed4c359d3da856a6ba5a9be139aaec7334ff78&ipo=images");
 }

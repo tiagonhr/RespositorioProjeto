@@ -21,7 +21,7 @@ class Order2Form(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 1
+    auto_number = 0
     
     # class attributes, identifier attribute must be the first one on the list
     att = ['code','classEvents', 'selectedDiaHora']
@@ -32,12 +32,12 @@ class Order2Form(Gclass):
     # Constructor: Called when an object is instantiated
     def __init__(self, code,classEvents, selectedDiaHora):
         #Uncomment in case of auto number on
-        if code == 'None':
-            codes = Order2Form.getatlist('_code')
-            if codes == []:
-                code = str(1)
-            else:
-                code = str(max(map(int,Order2Form.getatlist('_code'))) + 1)
+        # if code == 'None':
+        #     codes = Order2Form.getatlist('_code')
+        #     if codes == []:
+        #         code = str(1)
+        #     else:
+        #         code = str(max(map(int,Order2Form.getatlist('_code'))) + 1)
         # Object attributes
         self.code = code
         self.classEvents = classEvents

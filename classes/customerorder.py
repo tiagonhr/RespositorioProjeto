@@ -16,24 +16,24 @@ class CustomerOrder(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 1 # = 1 in case of auto number on
+    auto_number = 0 # = 1 in case of auto number on
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
     att = ['_code','_date','_customer_code']
     # Class header title
-    header = 'Orders'
+    header = 'Reserva de Salas'
     # field description for use in, for example, in input form
     des = ['Code','Date','Customer code']
     # Constructor: Called when an object is instantiated
     def __init__(self, code, date, customer_code):
         super().__init__()
         # Uncomment in case of auto number on
-        if code == 'None':
-            codes = CustomerOrder.getatlist('_code')
-            if codes == []:
-                code = str(1)
-            else:
-                code = str(max(map(int,CustomerOrder.getatlist('_code'))) + 1)
+        # if code == 'None':
+        #     codes = CustomerOrder.getatlist('_code')
+        #     if codes == []:
+        #         code = str(1)
+        #     else:
+        #         code = str(max(map(int,CustomerOrder.getatlist('_code'))) + 1)
         # Object attributes
         # Check the customer referential integrity
         if customer_code in Customer.lst:

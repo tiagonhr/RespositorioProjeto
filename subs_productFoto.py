@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 import os
 
 from classes.product import Product
+from classes.ReservaGinasio import ReservaGinasio
 
 prev_option = ""
 img = ""

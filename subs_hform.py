@@ -6,7 +6,7 @@
 
 """""
 from flask import Flask, render_template, request, session
-
+from classes.Residente import Residente
 from classes.customer import Customer
 from classes.product import Product
 from classes.customerorder import CustomerOrder

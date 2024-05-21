@@ -3,6 +3,11 @@ from datafile import filename
 
 import os
 
+from classes.Residente import Residente
+from classes.Reserva import Reserva
+from classes.Estacionamento import Estacionamento
+from classes.ResidenteAlugar import ResidenteAlugar
+from classes.ReservaGinasio import ReservaGinasio
 from classes.customer import Customer
 from classes.product import Product
 from classes.customerorder import CustomerOrder
@@ -11,11 +16,16 @@ from classes.userlogin import Userlogin
 
 app = Flask(__name__)
 
-Customer.read(filename + 'business.db')
-Product.read(filename + 'business.db')
-CustomerOrder.read(filename + 'business.db')
-OrderProduct.read(filename + 'business.db')
-Userlogin.read(filename + 'business.db')
+Residente.read(filename + 'Residencia.db')
+Reserva.read(filename + 'Residencia.db')
+Estacionamento.read(filename + 'Residencia.db')
+ResidenteAlugar.read(filename + 'Residencia.db')
+ReservaGinasio.read(filename + 'Residencia.db')
+Customer.read(filename + 'Residencia.db')
+Product.read(filename + 'Residencia.db')
+CustomerOrder.read(filename + 'Residencia.db')
+OrderProduct.read(filename + 'Residencia.db')
+Userlogin.read(filename + 'Residencia.db')
 prev_option = ""
 submenu = ""
 app.secret_key = 'BAD_SECRET_KEY'
@@ -82,6 +92,12 @@ def subform(cname=""):
 def productFoto():
     submenu = request.args.get("subm")
     cname = 'Product'
+    return productFotosub.productFoto(app,cname,submenu)
+
+@app.route("/ReservaGinasioform", methods=["post","get"])
+def ReservaGym():
+    submenu = request.args.get("subm")
+    cname = 'ReservaGinasio'
     return productFotosub.productFoto(app,cname,submenu)
 
 @app.route("/order/mapa", methods=["post","get"])
