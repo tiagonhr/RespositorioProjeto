@@ -12,7 +12,7 @@ nav{
     margin: 0;
     padding: 8px;
     height: 100%;
-    background-color: #e9967a;
+    background-color: #0F4D92;
 
 }
 
@@ -21,7 +21,7 @@ nav{
 }
 
 .button{
-    font-family: Roboto;
+    font-family: arial;
     font-size: 1em;
     font-style: none;
     color: #ffffff;
@@ -30,7 +30,7 @@ nav{
 }
 
 .button:link{
-    background-color: #004953;
+    background-color: #0F4D92;
     color: #ffffff;
 }
 
@@ -85,5 +85,5 @@ tr:nth-child(even) {
 }
 
 body {
-  background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.alphacoders.com%2F464%2F464616.jpg&f=1&nofb=1&ipt=1c6a6c3ba6cd5f9a590525a58bed4c359d3da856a6ba5a9be139aaec7334ff78&ipo=images");
+  background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4Njc1MzQwLWltYWdlLWt3dnhocW43LmpwZw.jpg");
 }
