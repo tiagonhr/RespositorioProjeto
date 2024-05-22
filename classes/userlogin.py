@@ -18,21 +18,20 @@ class Userlogin(Gclass):
     auto_number = 0
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_user','_usergroup','_password']
+    att = ['_code', '_user','_usergroup','_password']
     # Class header title
     header = 'Users'
     # field description for use in, for example, in input form
-    des = ['User','User group','Password']
+    des = ['code','User','User group','Password']
     username = ''
     # Constructor: Called when an object is instantiated
-    def __init__(self, user, usergroup, password, code = None):
+    def __init__(self,code , user, usergroup, password):
         super().__init__()
         # Object attributes
         self._user = user
         self._usergroup = usergroup
         self._password = password
-        if self._usergroup  == "users":
-             self._code = code
+        self._code = code
         # Add the new object to the dictionary of objects
         Userlogin.obj[user] = self
         # Add the code to the list of object codes
@@ -53,6 +52,9 @@ class Userlogin(Gclass):
     @property
     def code(self):
         return self._code
+    @code.setter
+    def code(self, code):
+        self._code = code
     @usergroup.setter
     def usergroup(self, code):
         self._code = code      

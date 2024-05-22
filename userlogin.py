@@ -74,4 +74,4 @@ def userlogin():
             password = ""
         return render_template("userlogin.html", butshow=butshow, butedit=butedit, user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
     else:
-        return render_template("index.html", ulogin=ulogin)
+      return render_template("index.html", ulogin=ulogin)
