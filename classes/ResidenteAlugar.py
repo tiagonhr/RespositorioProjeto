@@ -19,37 +19,37 @@ class ResidenteAlugar(Gclass):
     auto_number = 0 # = 1 in case of auto number on
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_sala','_date','_CodigoResidente']
+    att = ['_code','_date','_customer_code']
     # Class header title
     header = 'Alugar'
     # field description for use in, for example, in input form
-    des = ['sala','Date','Residente sala']
+    des = ['code','Date','Residente code']
     # Constructor: Called when an object is instantiated
-    def __init__(self, sala, date, CodigoResidente):
+    def __init__(self, code, date, customer_code):
         super().__init__()
         # Uncomment in case of auto number on
-        # if sala == 'None':
-        #     salas = ResidenteAlugar.getatlist('_sala')
-        #     if salas == []:
-        #         sala = str(1)
+        # if code == 'None':
+        #     codes = ResidenteAlugar.getatlist('_code')
+        #     if codes == []:
+        #         code = str(1)
         #     else:
-        #         sala = str(max(map(int,ResidenteAlugar.getatlist('_sala'))) + 1)
+        #         code = str(max(map(int,ResidenteAlugar.getatlist('_code'))) + 1)
         # Object attributes
         # Check the Residente referential integrity
-        if CodigoResidente in Residente.lst:
-            self._sala = sala
+        if customer_code in Residente.lst:
+            self._code = code
             self._date = datetime.date.fromisoformat(date)
-            self._CodigoResidente = CodigoResidente
+            self._customer_code = customer_code
             # Add the new object to the Alugar list
-            ResidenteAlugar.obj[sala] = self
-            ResidenteAlugar.lst.append(sala)
+            ResidenteAlugar.obj[code] = self
+            ResidenteAlugar.lst.append(code)
         else:
-            print('Residente ', CodigoResidente, ' not found')
+            print('Residente ', customer_code, ' not found')
     # Object properties
-    # sala property getter method
+    # code property getter method
     @property
-    def sala(self):
-        return self._sala
+    def code(self):
+        return self._code
     # date property getter method
     @property
     def date(self):
@@ -60,12 +60,12 @@ class ResidenteAlugar(Gclass):
         self._date = date
     # Residente property getter method
     @property
-    def CodigoResidente(self):
-        return self._CodigoResidente
+    def customer_code(self):
+        return self._customer_code
     # Residente property setter method
-    @CodigoResidente.setter
-    def CodigoResidente(self, CodigoResidente):
-        if CodigoResidente in Residente.lst:
-            self._CodigoResidente = CodigoResidente
+    @customer_code.setter
+    def customer_code(self, customer_code):
+        if customer_code in Residente.lst:
+            self._customer_code = customer_code
         else:
-            print('Residente ', CodigoResidente, ' not found')
+            print('Residente ', customer_code, ' not found')

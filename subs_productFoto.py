@@ -11,6 +11,7 @@ import os
 
 from classes.product import Product
 from classes.ReservaGinasio import ReservaGinasio
+from classes.SalasComuns import SalasComuns
 
 prev_option = ""
 img = ""

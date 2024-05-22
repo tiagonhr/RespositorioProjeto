@@ -9,14 +9,14 @@
         <img src="/static/images/{{cname}}.jpg" alt="{{cname}}" width="300" height="200">
         <h1>{{header}}</h1>
         <br>
-        <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/productform?option=edit'" class="button1">Edit</button>
-        <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/productform?option=delete'" class="button1">Delete</button>
-        <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/productform?option=insert'" class="button1">Insert</button>
+        <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=edit'" class="button1">Edit</button>
+        <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=delete'" class="button1">Delete</button>
+        <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=insert'" class="button1">Insert</button>
         <button id="save" type="submit" form="form" class = "button1" {{butedit}}>Save</button>
-        <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/productform?option=cancel'" class="button1">Cancel</button>
-        <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/productform?option=exit'" class="button1">Exit</button>
+        <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/ReservaGinasioform?option=cancel'" class="button1">Cancel</button>
+        <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=exit'" class="button1">Exit</button>
         <br><br>
-            <form id="form" action="/productform?option=save" enctype="multipart/form-data" method="post">
+            <form id="form" action="/ReservaGinasioform?option=save" enctype="multipart/form-data" method="post">
             
             <table>
             <tr>
@@ -46,10 +46,10 @@
                 </table>
         </form>
         <br>
-        <button id="first" type="button" {{butshow}} onclick="window.location.href = '/productform?option=first'" class="button1">First</button>
-        <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/productform?option=previous'" class="button1">Previous</button>
-        <button id="next" type="button" {{butshow}} onclick="window.location.href = '/productform?option=next'" class="button1">Next</button>
-        <button id="last" type="button" {{butshow}} onclick="window.location.href = '/productform?option=last'" class="button1">Last</button>
+        <button id="first" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=first'" class="button1">First</button>
+        <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=previous'" class="button1">Previous</button>
+        <button id="next" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=next'" class="button1">Next</button>
+        <button id="last" type="button" {{butshow}} onclick="window.location.href = '/ReservaGinasioform?option=last'" class="button1">Last</button>
     </div>
 
 {% endblock %}
