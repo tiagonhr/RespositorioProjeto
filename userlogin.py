@@ -26,6 +26,7 @@ def userlogin():
         butshow = "enabled"
         butedit = "disabled"
         option = request.args.get("option")
+        
         if option == "edit":
             butshow = "disabled"
             butedit = "enabled"
@@ -40,7 +41,7 @@ def userlogin():
         elif option == 'cancel':
             pass
         elif prev_option == 'insert' and option == 'save':
-            obj = Userlogin(request.form["user"],request.form["usergroup"], \
+            obj = Userlogin(request.form["code"],request.form["user"],request.form["usergroup"], \
                             Userlogin.set_password(request.form["password"]))
             Userlogin.insert(obj.user)
             Userlogin.last()
@@ -68,6 +69,7 @@ def userlogin():
             user = ""
             usergroup = ""
             password = ""
+            code = ""
         else:
             user = obj.user
             usergroup = obj.usergroup
