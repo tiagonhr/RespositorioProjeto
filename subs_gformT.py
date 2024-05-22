@@ -11,6 +11,9 @@ from classes.Reserva import Reserva
 from classes.Estacionamento import Estacionamento
 from classes.ResidenteAlugar import ResidenteAlugar
 from classes.ReservaGinasio import ReservaGinasio
+from classes.InscricaoGinasio import InscricaoGinasio
+from classes.SalasComuns import SalasComuns
+
 
 from classes.customer import Customer
 from classes.product import Product

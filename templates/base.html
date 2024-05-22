@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Customer order demo PCII</title>
+    <title>Residençia UniLiving</title>
     {% block title %}
     {% endblock %}
   </head>
@@ -14,18 +14,23 @@
                     <li><a class="button" href="/login">Login</a></li>
                 {% else %}
                     <li><a class="button" href="/logoff">Logoff</a></li>
-                    
-                    <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
-                    <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
-                    <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
-                    <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
-                    <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>   
-                    <li><a class="button" href="/gform/Customer">Customer</a></li>
-                    
-                    <li><a class="button" href="/submenu?subm=product">Product</a></li>
-                    <li><a class="button" href="/submenu?subm=order">Order</a></li>
-                    
-                    
+                    {% if grupo=="admin" %}
+                        <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
+                        <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
+                        <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
+                        <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
+                        <li><a class="button" href="/submenu?subm=ReservaGinasio">Ginasio</a></li>   
+                        <li><a class="button" href="/gform/Customer">Customer</a></li>
+                        
+                        <li><a class="button" href="/submenu?subm=product">Product</a></li>
+                        <li><a class="button" href="/submenu?subm=order">Order</a></li>
+                    {% else %}
+                        <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
+                        <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
+                        <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
+                        <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
+                        <li><a class="button" href="/submenu?subm=ReservaGinasio">Ginasio</a></li>  
+                    {% endif %}
                     
                     <li><a class="button" style="color:lightblue">Utilizador: {{ulogin}}</a></li>
                     
@@ -34,7 +39,6 @@
                     {% if submenu == "Reserva" %}
                         <li><a class="button" href="/gform/Reserva?option=''&subm=Reserva">Reserva form</a></li>
                         <li><a class="button" href="/gformT/Reserva?option=''&subm=Reserva">Reserva Tabela(foto)</a></li>
-                        <li><a class="button" href="/order/mapa?option=''">Mapa encomendas</a></li>
                     {% endif %}
                     
                     {% if submenu == "Estacionamento" %}
@@ -48,12 +52,17 @@
                     {% endif %}
                     
                     {% if submenu == "ResidenteAlugar" %}
+                        <li><a class="button" href="/SalasComunsform?subm=SalasComuns">Inserir Aulas</a></li>
+                        <li><a class="button" href="/gformT/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
                         <li><a class="button" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
+                        <li><a class="button" href="/Alugar/mapa?option=''">Mapa Reservas de Salas Comuns</a></li>
                     {% endif %}
                     
                     {% if submenu == "ReservaGinasio" %}
-                        <li><a class="button" href="/gform/ReservaGinasio?subm=ReservaGinasio">ReservaGinasio</a></li>
-                        <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">ReservaGinasio(foto)</a></li>
+                        <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">Inserir Aulas</a></li>
+                        <li><a class="button" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
+                        <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
+                        <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
                     {% endif %} 
 
                     {% if submenu == "order" %}

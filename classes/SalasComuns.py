@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 21 09:00:05 2024
+Created on Tue May 21 19:14:43 2024
 
 @author: tiagoneves
 """
 
-#%% Class ReservaGinasio
+#%% Class SalasComuns
 # Import the generic class
 from classes.gclass import Gclass
 
-class ReservaGinasio(Gclass):
+class SalasComuns(Gclass):
     obj = dict()
     lst = list()
     pos = 0
@@ -17,50 +17,40 @@ class ReservaGinasio(Gclass):
     auto_number = 0 # = 1 in case of auto number on
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_code','_dia','_aula', '_foto']
+    att = ['_code','_nome','_foto']
     # Class header title
-    header = 'Sessões do Ginasio'
+    header = 'Salas Comuns'
     # field description for use in, for example, in input form
-    des = ['Codigo','Dia ','Aula','Foto']
+    des = ['Codigo','Tipo','Foto']
     # Constructor: Called when an object is instantiated
-    def __init__(self, code, dia, aula,foto):
+    def __init__(self, code, nome, foto):
         super().__init__()
         # Uncomment in case of auto number on
         # if code == 'None':
-        #     codes = ReservaGinasio.getatlist('_code')
+        #     codes = SalasComuns.getatlist('_code')
         #     if codes == []:
         #         code = str(1)
         #     else:
-        #         code = str(max(map(int,ReservaGinasio.getatlist('_code'))) + 1)
+        #         code = str(max(map(int,SalasComuns.getatlist('_code'))) + 1)
         # Object attributes
         self._code = code
-        self._dia = dia
-        self._aula = aula
+        self._nome = nome
         self._foto = foto
-        # Add the new object to the ReservaGinasio list
-        ReservaGinasio.obj[code] = self
-        ReservaGinasio.lst.append(code)
+        # Add the new object to the SalasComuns list
+        SalasComuns.obj[code] = self
+        SalasComuns.lst.append(code)
     # Object properties
     # code property getter method
     @property
     def code(self):
         return self._code
-    # dia property getter method
+    # nome property getter method
     @property
-    def dia(self):
-        return self._dia
-    # aula property getter method
-    @property
-    def aula(self):
-        return self._aula
+    def nome(self):
+        return self._nome
     @property
     def foto(self):
         return self._foto
-    # aula property setter method
-    @aula.setter
-    def aula(self, aula):
-        self._aula = aula
-    # foto property setter method
     @foto.setter
     def foto(self, foto):
         self._foto = foto

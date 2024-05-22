@@ -1,28 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-@author: António Brito / Carlos Bragança
-(2024)
-#objective: subs_gform.py
+Created on Tue May 21 19:40:33 2024
 
-"""""
+@author: tiagoneves
+"""
+
 from flask import Flask, render_template, request, session
-from classes.Residente import Residente
-from classes.Reserva import Reserva
-from classes.Estacionamento import Estacionamento
-from classes.ResidenteAlugar import ResidenteAlugar
+from werkzeug.utils import secure_filename
+import os
+
+from classes.product import Product
 from classes.ReservaGinasio import ReservaGinasio
-from classes.InscricaoGinasio import InscricaoGinasio
 from classes.SalasComuns import SalasComuns
 
-from classes.customer import Customer
-from classes.product import Product
-from classes.customerorder import CustomerOrder
-from classes.orderproduct import OrderProduct
-from classes.userlogin import Userlogin
-
 prev_option = ""
+img = ""
 
-def gform(cname='',submenu=""):
+
+
+def productFoto(app,cname='',submenu=""):
+    global img
     global prev_option
     ulogin=session.get("user")
     if (ulogin != None):
@@ -35,17 +32,47 @@ def gform(cname='',submenu=""):
                 strobj = "None"
             else:
                 strobj = request.form[cl.att[0]]
+            
+            file = request.files['img']
+            filename = secure_filename(file.filename)
+            foto = filename
+            if foto != "" :
+                
+                file.save(os.path.join(app.config['UPLOAD'], filename))
+
+                
             for i in range(1,len(cl.att)):
-                strobj += ";" + request.form[cl.att[i]]
+                att = cl.att[i]
+                if att != '_foto':
+                    strobj += ";" + request.form[cl.att[i]]
+                else:
+                    strobj += ";" + foto
+                    
             obj = cl.from_string(strobj)
             cl.insert(getattr(obj, cl.att[0]))
             cl.last()
         elif prev_option == 'edit' and option == 'save':
             obj = cl.current()
             # if auto_number = 1 the key stays the same
+            
+            file = request.files['img']
+            filename = secure_filename(file.filename)
+            foto = filename
+            if foto != "" and foto != obj._foto:
+                
+                file.save(os.path.join(app.config['UPLOAD'], filename))
+
+            else:
+                foto = obj._foto
+            
             for i in range(cl.auto_number,len(cl.att)):
                 att = cl.att[i]
-                setattr(obj, att, request.form[att])
+                if att != '_foto':
+                    setattr(obj, att, request.form[att])
+                else:
+                    setattr(obj, att, foto)
+                    
+                
             cl.update(getattr(obj, cl.att[0]))
         else:
             if option == "edit":
@@ -77,9 +104,20 @@ def gform(cname='',submenu=""):
             obj = dict()
             for att in cl.att:
                 obj[att] = ""
-        return render_template("gform.html", butshow=butshow, butedit=butedit,
+            img = os.path.join(app.config['UPLOAD'], "None.png")    
+        else:
+            
+            if obj._foto == "" or obj._foto == "None":
+                img = os.path.join(app.config['UPLOAD'], "None.png") 
+            else:
+                img = os.path.join(app.config['UPLOAD'], obj._foto)
+                
+                
+            print("obj._foto>>>>>>",obj._foto)
+        return render_template("SalasComunsform.html", butshow=butshow, butedit=butedit,
                         cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
                         ulogin=session.get("user"),auto_number=cl.auto_number,
+                        img=img,
                         submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)

@@ -7,7 +7,10 @@ from classes.Residente import Residente
 from classes.Reserva import Reserva
 from classes.Estacionamento import Estacionamento
 from classes.ResidenteAlugar import ResidenteAlugar
+from classes.SalasComuns import SalasComuns
 from classes.ReservaGinasio import ReservaGinasio
+from classes.InscricaoGinasio import InscricaoGinasio
+
 from classes.customer import Customer
 from classes.product import Product
 from classes.customerorder import CustomerOrder
@@ -20,7 +23,9 @@ Residente.read(filename + 'Residencia.db')
 Reserva.read(filename + 'Residencia.db')
 Estacionamento.read(filename + 'Residencia.db')
 ResidenteAlugar.read(filename + 'Residencia.db')
+SalasComuns.read(filename + 'Residencia.db')
 ReservaGinasio.read(filename + 'Residencia.db')
+InscricaoGinasio.read(filename + 'Residencia.db')
 Customer.read(filename + 'Residencia.db')
 Product.read(filename + 'Residencia.db')
 CustomerOrder.read(filename + 'Residencia.db')
@@ -42,10 +47,14 @@ import subs_subform as gfsubsub
 import subs_productFoto as productFotosub
 import subs_mapaOrderform as mapasub
 
+import subs_mapaAlugarform as mapasub2
+import subs_SalasComunsFoto as SalasComunsFotosub
 
 @app.route("/")
 def index():
-    return render_template("index.html", ulogin=session.get("user"))
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("index.html", ulogin=user, grupo=grupo, submenu=None)
     
 @app.route("/login")
 def login():
@@ -57,13 +66,21 @@ def logoff():
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
-    return lsub.chklogin()
+    user = request.form["user"]
+    password = request.form["password"]
+    resul = Userlogin.chk_password(user, password)
+    if resul == "Valid":
+        grupo = Userlogin.obj[user].usergroup
+        session["user"] = user
+        return render_template("index.html", grupo=grupo, ulogin=session.get("user"), submenu=None)
+    return render_template("login.html", user=user, password=password, ulogin=session.get("user"), resul=resul, submenu=None)
 
 @app.route("/submenu", methods=["post","get"])
 def getsubm():
-    global submenu
     submenu = request.args.get("subm")
-    return render_template("index.html", ulogin=session.get("user"),submenu=submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("index.html", ulogin=user, grupo=grupo, submenu=submenu)
 
 @app.route("/gform/<cname>", methods=["post","get"])
 def gform(cname=''):
@@ -100,15 +117,29 @@ def ReservaGym():
     cname = 'ReservaGinasio'
     return productFotosub.productFoto(app,cname,submenu)
 
+@app.route("/SalasComunsform", methods=["post","get"])
+def SalasComunsInsert():
+    submenu = request.args.get("subm")
+    cname = 'SalasComuns'
+    return SalasComunsFotosub.productFoto(app,cname,submenu)
+
 @app.route("/order/mapa", methods=["post","get"])
 def ordermapa():
     submenu = request.args.get("subm")
     cname = ''
     return mapasub.mapaOrderform(app,cname,submenu)
 
+@app.route("/Alugar/mapa", methods=["post","get"])
+def AlugarSalaComum():
+    submenu = request.args.get("subm")
+    cname = ''
+    return mapasub2.mapaAlugarform(app,cname,submenu)
+
 @app.route("/uc", methods=["post","get"])
 def uc():
-    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("uc.html", ulogin=user, grupo=grupo, submenu=submenu)
 
 
 
