@@ -26,13 +26,11 @@ Product.read(filename + 'Residencia.db')
 CustomerOrder.read(filename + 'Residencia.db')
 OrderProduct.read(filename + 'Residencia.db')
 Userlogin.read(filename + 'Residencia.db')
-prev_option = ""
-submenu = ""
+
 app.secret_key = 'BAD_SECRET_KEY'
 
 upload_folder = os.path.join('static', 'ProductFotos')
 app.config['UPLOAD'] = upload_folder
-
 
 import subs_login as lsub
 import subs_gform as gfsub
@@ -42,11 +40,14 @@ import subs_subform as gfsubsub
 import subs_productFoto as productFotosub
 import subs_mapaOrderform as mapasub
 
-
 @app.route("/")
 def index():
-    return render_template("index.html", ulogin=session.get("user"))
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("index.html", ulogin=user, grupo=grupo, submenu=None)
     
+
+
 @app.route("/login")
 def login():
     return lsub.login()
@@ -57,18 +58,27 @@ def logoff():
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
-    return lsub.chklogin()
+    user = request.form["user"]
+    password = request.form["password"]
+    resul = Userlogin.chk_password(user, password)
+    if resul == "Valid":
+        grupo = Userlogin.obj[user].usergroup
+        session["user"] = user
+        return render_template("index.html", grupo=grupo, ulogin=session.get("user"), submenu=None)
+    return render_template("login.html", user=user, password=password, ulogin=session.get("user"), resul=resul, submenu=None)
 
 @app.route("/submenu", methods=["post","get"])
 def getsubm():
-    global submenu
     submenu = request.args.get("subm")
-    return render_template("index.html", ulogin=session.get("user"),submenu=submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("index.html", ulogin=user, grupo=grupo, submenu=submenu)
 
 @app.route("/gform/<cname>", methods=["post","get"])
 def gform(cname=''):
     submenu = request.args.get("subm")
     return gfsub.gform(cname,submenu)
+
 
 @app.route("/gformT/<cname>", methods=["post","get"])
 def gformT(cname=''):
@@ -86,7 +96,6 @@ def hform(cname=''):
 def subform(cname=""):
     submenu = request.args.get("subm")
     return gfsubsub.subform(cname,submenu)
-
 
 @app.route("/productform", methods=["post","get"])
 def productFoto():
@@ -106,13 +115,14 @@ def ordermapa():
     cname = ''
     return mapasub.mapaOrderform(app,cname,submenu)
 
+
+
 @app.route("/uc", methods=["post","get"])
 def uc():
-    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return render_template("uc.html", ulogin=user, grupo=grupo, submenu=submenu)
 
-
-
-    
 if __name__ == '__main__':
-    app.run(debug=True,port=6001)
+    app.run(debug=True, port=6001)
     #app.run()

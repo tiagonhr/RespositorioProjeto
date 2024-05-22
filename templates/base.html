@@ -1,75 +1,80 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Customer order demo PCII</title>
-    {% block title %}
-    {% endblock %}
-  </head>
-    <body>
-        <nav>
-            <ul class="menu">
-                {% if ulogin == None %}
-                    <li><a class="button" href="/login">Login</a></li>
-                {% else %}
-                    <li><a class="button" href="/logoff">Logoff</a></li>
-                    
-                    <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
-                    <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
-                    <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
-                    <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
-                    <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>   
-                    <li><a class="button" href="/gform/Customer">Customer</a></li>
-                    
-                    <li><a class="button" href="/submenu?subm=product">Product</a></li>
-                    <li><a class="button" href="/submenu?subm=order">Order</a></li>
-                    
-                    
-                    
-                    <li><a class="button" style="color:lightblue">Utilizador: {{ulogin}}</a></li>
-                    
-                    <br><br>
-                    
-                    {% if submenu == "Reserva" %}
-                        <li><a class="button" href="/gform/Reserva?option=''&subm=Reserva">Reserva form</a></li>
-                        <li><a class="button" href="/gformT/Reserva?option=''&subm=Reserva">Reserva Tabela(foto)</a></li>
-                        <li><a class="button" href="/order/mapa?option=''">Mapa encomendas</a></li>
-                    {% endif %}
-                    
-                    {% if submenu == "Estacionamento" %}
-                        <li><a class="button" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento form</a></li>
-                        <li><a class="button" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
-                    {% endif %}
-                    
-                    {% if submenu == "Residente" %}
-                        <li><a class="button" href="/gform/Residente?option=''&subm=Residente">Residente form</a></li>
-                        <li><a class="button" href="/gformT/Residente?option=''&subm=Residente">Residente Tabela(foto)</a></li>
-                    {% endif %}
-                    
-                    {% if submenu == "ResidenteAlugar" %}
-                        <li><a class="button" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
-                    {% endif %}
-                    
-                    {% if submenu == "ReservaGinasio" %}
-                        <li><a class="button" href="/gform/ReservaGinasio?subm=ReservaGinasio">ReservaGinasio</a></li>
-                        <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">ReservaGinasio(foto)</a></li>
-                    {% endif %} 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer order demo PCII</title>
+  {% block title %}
+  {% endblock %}
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      {% if ulogin == None %}
+        <li><a class="button" href="/login">Login</a></li>   
+      {% else %}
+        <li><a class="button" href="/logoff">Logoff</a></li>
 
-                    {% if submenu == "order" %}
-                        <li><a class="button" href="/subform/CustomerOrder_OrderProduct?option=''&subm=order">Order lines</a></li>
-                        <li><a class="button" href="/order/mapa?option=''">Mapa encomendas</a></li>
-                    {% endif %} 
-                    
-                    {% if submenu == "product" %}
-                        <li><a class="button" href="/gform/Product?subm=product">Product</a></li>
-                        <li><a class="button" href="/productform?subm=product">Product(foto)</a></li>
-                    {% endif %} 
-                    
-                {% endif %}
-            </ul>
-        </nav>
-    {% block content %}
-    {% endblock %}
-  </body>
+        {% if grupo == "admin" %}
+            <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
+            <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
+            <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
+            <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
+            <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>   
+            <li><a class="button" href="/gform/Customer">Customer</a></li>
+            <li><a class="button" href="/submenu?subm=product">Product</a></li>
+            <li><a class="button" href="/submenu?subm=order">Order</a></li>
+            
+        {% else %}
+            <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
+            <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
+            <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
+            <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
+            <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>
+        
+        {% endif %}
+        <li><a class="button" style="color:lightblue">Utilizador : {{ulogin}}</a></li>
+        <br><br>
+
+        {% if submenu == "Reserva" %}
+
+            <li><a class="button submenu" href="/gform/Reserva?option=''&subm=Reserva">Reserva form</a></li>
+            <li><a class="button submenu" href="/gformT/Reserva?option=''&subm=Reserva">Reserva Tabela(foto)</a></li>
+        {% endif %}
+
+        {% if submenu == "Estacionamento" %}
+          <li><a class="button submenu" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento form</a></li>
+          <li><a class="button submenu" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
+        {% endif %}
+
+        {% if submenu == "Residente" %}
+          <li><a class="button submenu" href="/gform/Residente?option=''&subm=Residente">Residente form</a></li>
+          <li><a class="button submenu" href="/gformT/Residente?option=''&subm=Residente">Residente Tabela(foto)</a></li>
+        {% endif %}
+
+        {% if submenu == "ResidenteAlugar" %}
+          <li><a class="button submenu" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
+        {% endif %}
+
+        {% if submenu == "ReservaGinasio" %}
+          <li><a class="button submenu" href="/gform/ReservaGinasio?subm=ReservaGinasio">ReservaGinasio</a></li>
+          <li><a class="button submenu" href="/ReservaGinasioform?subm=ReservaGinasio">ReservaGinasio(foto)</a></li>
+        {% endif %} 
+
+        {% if submenu == "order" %}
+          <li><a class="button submenu" href="/subform/CustomerOrder_OrderProduct?option=''&subm=order">Order lines</a></li>
+          <li><a class="button submenu" href="/order/mapa?option=''">Mapa encomendas</a></li>
+        {% endif %} 
+
+        {% if submenu == "product" %}
+          <li><a class="button submenu" href="/gform/Product?subm=product">Product</a></li>
+          <li><a class="button submenu" href="/productform?subm=product">Product(foto)</a></li>
+        {% endif %}
+        
+      {% endif %}
+    </ul>
+  </nav>
+  {% block content %}
+  {% endblock %}
+</body>
 </html>
