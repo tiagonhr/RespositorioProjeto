@@ -13,7 +13,7 @@ class Residente(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 0      # = 1 in case of auto number on
+    auto_number = 1      # = 1 in case of auto number on
     nkey= 1
     # Attribute names list, identifier attribute must be the first one
     att = ['_code','_fname', '_lname','_email','_dob','_occupation']
@@ -25,12 +25,12 @@ class Residente(Gclass):
     def __init__(self, code, fname, lname, email, dob, occupation):
         super().__init__()
         # Uncomment in case of auto number on
-        # if code == 'None':
-        #     codes = Person.getatlist('_code')
-        #     if codes == []:
-        #         code = str(1)
-        #     else:
-        #         code = str(max(map(int,Person.getatlist('_code'))) + 1)
+        if code == 'None':
+            code = Residente.getatlist('_code')
+            if code == []:
+                code = str(1)
+            else:
+                code = str(max(map(int,Residente.getatlist('_code'))) + 1)
         # Object attributes
         self._code = str(code)
         self._fname = fname
@@ -43,6 +43,7 @@ class Residente(Gclass):
         # Add the code to the list of object codes
         Residente.lst.append(code)
     # code property getter method
+    
     @property
     def code(self):
         return self._code

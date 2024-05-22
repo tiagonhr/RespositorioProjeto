@@ -77,25 +77,33 @@ def getsubm():
 @app.route("/gform/<cname>", methods=["post","get"])
 def gform(cname=''):
     submenu = request.args.get("subm")
-    return gfsub.gform(cname,submenu)
-
+    user = session.get("user")
+    code = Userlogin.obj[user].code if user else None
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfsub.gform(cname,submenu, grupo,code)
 
 @app.route("/gformT/<cname>", methods=["post","get"])
 def gformT(cname=''):
     submenu = request.args.get("subm")
-    return gfTsub.gformT(cname,submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfTsub.gformT(cname,submenu,grupo)
 
 @app.route("/hform/<cname>", methods=["post","get"])
 def hform(cname=''):
     submenu = request.args.get("subm")
-    return gfhsub.hform(cname,submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfhsub.hform(cname,submenu,grupo)
 
 
         
 @app.route("/subform/<cname>", methods=["post","get"])
 def subform(cname=""):
     submenu = request.args.get("subm")
-    return gfsubsub.subform(cname,submenu)
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfsubsub.subform(cname,submenu,grupo)
 
 @app.route("/productform", methods=["post","get"])
 def productFoto():
@@ -115,7 +123,10 @@ def ordermapa():
     cname = ''
     return mapasub.mapaOrderform(app,cname,submenu)
 
-
+@app.route("/Userlogin", methods=["post","get"])
+def userlogin(cname = ""):
+    submenu = request.args.get("subm")
+    return gfsubsub.subform(cname,submenu)
 
 @app.route("/uc", methods=["post","get"])
 def uc():

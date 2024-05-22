@@ -26,13 +26,13 @@ def gerah(clh):
     return objh
     
 
-def hform(cname='',submenu=""):
+def hform(cname='',submenu="",grupo=""):
     global prev_option
     global diahoraselected
     
     cname = 'Class_horario'
     ulogin=session.get("user")
-    if (ulogin != None):
+    if (grupo != None):
         cl = eval(cname)
         clh = eval("Horario2Form")
         butshow = "enabled"

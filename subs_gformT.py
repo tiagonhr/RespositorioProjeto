@@ -23,12 +23,12 @@ from classes.userlogin import Userlogin
 
 prev_option = ""
 
-def gformT(cname='',submenu=""):
+def gformT(cname='',submenu="",grupo=""):
     global prev_option
     
     #scname = eval(cname)
     ulogin=session.get("user")
-    if (ulogin != None):
+    if (grupo != None):
         print(cname)
         sbl = eval(cname)
         butshow = "enabled"

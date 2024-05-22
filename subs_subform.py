@@ -14,13 +14,13 @@ from classes.userlogin import Userlogin
 
 prev_option = ""
 
-def subform(cname="",submenu=""):
+def subform(cname="",submenu="",grupo=""):
     global prev_option
     tlist = cname.split('_')
     cnames = tlist[0]
     scname = tlist[1]
     ulogin=session.get("user")
-    if (ulogin != None):
+    if (grupo != None):
         cl = eval(cnames)
         sbl = eval(scname)
         butshow = "enabled"

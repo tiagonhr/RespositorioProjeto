@@ -25,12 +25,14 @@ class Userlogin(Gclass):
     des = ['User','User group','Password']
     username = ''
     # Constructor: Called when an object is instantiated
-    def __init__(self, user, usergroup, password):
+    def __init__(self, user, usergroup, password, code = None):
         super().__init__()
         # Object attributes
         self._user = user
         self._usergroup = usergroup
         self._password = password
+        if self._usergroup  == "users":
+             self._code = code
         # Add the new object to the dictionary of objects
         Userlogin.obj[user] = self
         # Add the code to the list of object codes
@@ -47,6 +49,13 @@ class Userlogin(Gclass):
     @usergroup.setter
     def usergroup(self, usergroup):
         self._usergroup = usergroup
+        
+    @property
+    def code(self):
+        return self._code
+    @usergroup.setter
+    def usergroup(self, code):
+        self._code = code      
         
     @property
     def password(self):
