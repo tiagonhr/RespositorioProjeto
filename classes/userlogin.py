@@ -82,3 +82,11 @@ class Userlogin(Gclass):
     def set_password(self, password):
         passencrypted = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         return passencrypted.decode()
+    
+    
+    @staticmethod
+    def find_by_code(code):
+        for user in Userlogin.lst:
+            if user.code == code:
+                return user
+        return None

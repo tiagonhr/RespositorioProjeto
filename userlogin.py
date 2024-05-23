@@ -16,10 +16,11 @@ from classes.userlogin import Userlogin
 from classes.gclass import Gclass
 prev_option = ""
 
-def userlogin():
+def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
     global prev_option
     ulogin=session.get("user")
-    if (ulogin != None):
+
+    if (grupo == "admin"):
         group = Userlogin.obj[ulogin].usergroup
         if group != "admin":
             Userlogin.current(ulogin)
@@ -75,5 +76,44 @@ def userlogin():
             usergroup = obj.usergroup
             password = ""
         return render_template("userlogin.html", butshow=butshow, butedit=butedit, user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
+    
+    elif grupo == "users":
+        butshow = "enabled"
+        butedit = "disabled"
+        option = request.args.get("option")
+
+        # Filtra pelo usuário fornecido
+        Userlogin.set_filter({"code": [code]})
+        obj = Userlogin.current()
+        if not obj:
+            return render_template("error.html", message="User not found.")
+
+        if option == "edit":
+            butshow = "disabled"
+            butedit = "enabled"
+        elif option == 'cancel':
+            pass
+        elif prev_option == 'edit' and option == 'save':
+            if request.form["password"]:
+                obj.password = Userlogin.set_password(request.form["password"])
+            Userlogin.update(obj.user)
+        elif option == 'exit':
+            return render_template("index.html", ulogin=session.get("user"))
+
+        prev_option = option
+
+        if option == 'insert' or len(Userlogin.lst) == 0:
+            user = ""
+            usergroup = ""
+            password = ""
+            code = ""
+        else:
+            user = obj.user
+            usergroup = obj.usergroup
+            code = obj.code
+            password = ""
+
+        return render_template("userlogin.html", butshow=butshow, butedit=butedit, code=code, user=user, usergroup=usergroup, password=password, ulogin=session.get("user"), group=grupo)
+
     else:
-      return render_template("index.html", ulogin=ulogin)
+        return render_template("index.html", ulogin=ulogin)

@@ -7,7 +7,10 @@ from classes.Residente import Residente
 from classes.Reserva import Reserva
 from classes.Estacionamento import Estacionamento
 from classes.ResidenteAlugar import ResidenteAlugar
+from classes.SalasComuns import SalasComuns
 from classes.ReservaGinasio import ReservaGinasio
+from classes.InscricaoGinasio import InscricaoGinasio
+
 from classes.customer import Customer
 from classes.product import Product
 from classes.customerorder import CustomerOrder
@@ -20,7 +23,9 @@ Residente.read(filename + 'Residencia.db')
 Reserva.read(filename + 'Residencia.db')
 Estacionamento.read(filename + 'Residencia.db')
 ResidenteAlugar.read(filename + 'Residencia.db')
+SalasComuns.read(filename + 'Residencia.db')
 ReservaGinasio.read(filename + 'Residencia.db')
+InscricaoGinasio.read(filename + 'Residencia.db')
 Customer.read(filename + 'Residencia.db')
 Product.read(filename + 'Residencia.db')
 CustomerOrder.read(filename + 'Residencia.db')
@@ -40,6 +45,8 @@ import subs_subform as gfsubsub
 import subs_productFoto as productFotosub
 import subs_mapaOrderform as mapasub
 import userlogin as loginsub
+import subs_mapaAlugarform as mapasub2
+import subs_SalasComunsFoto as SalasComunsFotosub
 
 @app.route("/")
 def index():
@@ -124,10 +131,28 @@ def ordermapa():
     cname = ''
     return mapasub.mapaOrderform(app,cname,submenu)
 
+
+@app.route("/SalasComunsform", methods=["post","get"])
+def SalasComunsInsert():
+    submenu = request.args.get("subm")
+    cname = 'SalasComuns'
+    return SalasComunsFotosub.productFoto(app,cname,submenu)
+
+@app.route("/Alugar/mapa", methods=["post","get"])
+def AlugarSalaComum():
+    submenu = request.args.get("subm")
+    cname = ''
+    return mapasub2.mapaAlugarform(app,cname,submenu)
+
+
 @app.route("/Userlogin", methods=["post","get"])
 def userlogin(cname = ""):
     submenu = request.args.get("subm")
-    return loginsub.userlogin()
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    code = Userlogin.obj[user].code if user else None
+    password = Userlogin.obj[user].password if user else None
+    return loginsub.userlogin(cname,submenu, code,user,grupo,password)
 
 @app.route("/uc", methods=["post","get"])
 def uc():
