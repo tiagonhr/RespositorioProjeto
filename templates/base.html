@@ -87,8 +87,17 @@
                 <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
                 <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
             {% endif %}    
+        {% endif %}       
                 
-                
+        {% if submenu == "order" %}
+            <li><a class="button" href="/subform/CustomerOrder_OrderProduct?option=''&subm=order">Order lines</a></li>
+            <li><a class="button" href="/order/mapa?option=''">Mapa encomendas</a></li>
+        {% endif %} 
+        
+        {% if submenu == "product" %}
+            <li><a class="button" href="/gform/Product?subm=product">Product</a></li>
+            <li><a class="button" href="/productform?subm=product">Product(foto)</a></li>
+
         {% endif %}
               
       {% endif %}
