@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May 21 18:22:34 2024
-
-@author: tiagoneves
-"""
-
-
 # Import the generic class
 from classes.gclass import Gclass
 from classes.ReservaGinasio import ReservaGinasio
@@ -19,13 +11,13 @@ class InscricaoGinasio(Gclass):
     nkey = 1
     
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_tcode_aula','_nome','_aula']
+    att = ['_code_aula','_nome','_code']
     # Class header title
     header = 'InscricaoGinasio'
     # field description for use in, for example, in input form
-    des = ['Código da Aula','Nome Inscrição','Tipo de Aula']
+    des = ['Código da Aula','Nome Inscrição','Código Residente']
     # Constructor: Called when an object is instantiated
-    def __init__(self, code_aula,nome,aula):
+    def __init__(self, code_aula,nome,code):
         super().__init__()
         # Uncomment in case of auto number on
         # if code_aula == 'None':
@@ -38,10 +30,10 @@ class InscricaoGinasio(Gclass):
             self._code_aula = code_aula
             self._nome = nome
             # self._nome = nometime.nome.fromisoformat(nome)
-            self._aula = aula
+            self._code = code
             # Add the new object to the Order list
-            InscricaoGinasio.obj[code_aula] = self
-            InscricaoGinasio.lst.append(code_aula)
+            InscricaoGinasio.obj[code] = self
+            InscricaoGinasio.lst.append(code)
         else:
             print('ReservaGinasio ', code_aula, ' não está na lista de aulas')
        
@@ -59,11 +51,7 @@ class InscricaoGinasio(Gclass):
     # aula property getter method
     @property
     def aula(self):
-        return self._aula
-    
-    @code_aula.setter
-    def code_aula(self, code_aula):
-        self._code_aula = code_aula
+        return self._code
     
     # nome property setter method
     @nome.setter

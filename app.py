@@ -40,6 +40,7 @@ app.config['UPLOAD'] = upload_folder
 import subs_login as lsub
 import subs_gform as gfsub
 import subs_gform_users as gfsubusers
+import subs_gform_users1 as gfsubusers1
 import subs_gformT_users as gfTsubusers
 import subs_gformT as gfTsub
 import subs_hform as gfhsub
@@ -99,6 +100,14 @@ def gformusers(cname=''):
     code = Userlogin.obj[user].code if user else None
     grupo = Userlogin.obj[user].usergroup if user else None
     return gfsubusers.gform(cname,submenu, grupo,code)
+
+@app.route("/gformusers1/<cname>", methods=["post","get"])
+def gformusers1(cname=''):
+    submenu = request.args.get("subm")
+    user = session.get("user")
+    code = Userlogin.obj[user].code if user else None
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfsubusers1.gform(cname,submenu, grupo,code)
     
 @app.route("/gformT/<cname>", methods=["post","get"])
 def gformT(cname=''):

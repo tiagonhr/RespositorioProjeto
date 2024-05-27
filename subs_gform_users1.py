@@ -82,7 +82,7 @@ def gform(cname='', submenu="", grupo="",code = ""):
         if option == 'insert' or len(cl.lst) == 0:
             obj = {att: "" for att in cl.att}
 
-        return render_template("gformusers.html", butshow=butshow, butedit=butedit,
+        return render_template("gformusers1.html", butshow=butshow, butedit=butedit,
                                 cname=cname, obj=obj, att=cl.att, header=cl.header, des=cl.des,
                                 ulogin=session.get("user"), auto_number=cl.auto_number,
                                 submenu=submenu)

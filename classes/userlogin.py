@@ -15,7 +15,7 @@ class Userlogin(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 0
+    auto_number = 1
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
     att = ['_code', '_user','_usergroup','_password']
@@ -27,6 +27,13 @@ class Userlogin(Gclass):
     # Constructor: Called when an object is instantiated
     def __init__(self,code , user, usergroup, password):
         super().__init__()
+        # Uncomment in case of auto number on
+        if code == 'None':
+            code = Userlogin.getatlist('_code')
+            if code == []:
+                code = str(1)
+            else:
+                code = str(max(map(int,Userlogin.getatlist('_code'))) + 1)
         # Object attributes
         self._user = user
         self._usergroup = usergroup
