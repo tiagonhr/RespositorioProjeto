@@ -21,13 +21,13 @@
         <br><br>
         <form id="form" action="/Userlogin?option=save" method="post">
             <label for="code">Código:</label>
-            <input type="text" disabled id="code" name="code" value="{{code}}" size="40"/>
+            <input type="text" id="code" name="code" value="{{code}}" size="40" {% if group != "admin" %}disabled{% else %}{{butedit}}{% endif %}/>
             <br><br>
             <label for="user">Utilizador:</label>
             <input type="text" {{butedit}} id="user" name="user" value="{{user}}" size="40"/>
             <br><br>
             <label for="usergroup">Grupo:</label>
-            <input type="text" {{ 'disabled' }} id="usergroup" name="usergroup" value="{{usergroup}}" size="40"/>
+            <input type="text" id="usergroup" name="usergroup" value="{{usergroup}}" size="40" {% if group != "admin" %}disabled{% else %}{{butedit}}{% endif %}/>
             <br><br>
             <label for="password">Password:</label>
             <input type="password" {{butedit}} id="password" name="password" size="40"/>

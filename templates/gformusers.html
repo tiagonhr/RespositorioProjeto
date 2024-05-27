@@ -10,12 +10,12 @@
         <h1>{{header}}</h1>
         {% if obj == None %}
              <br>
-             <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/gform/{{cname}}?option=edit'" class="button1">Editar</button>
-             <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/gform/{{cname}}?option=delete'" class="button1">Apagar</button>
-             <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/gform/{{cname}}?option=insert'" class="button1">Inserir</button>
+             <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/gformusers/{{cname}}?option=edit'" class="button1">Editar</button>
+             <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/gformusers/{{cname}}?option=delete'" class="button1">Apagar</button>
+             <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/gformusers/{{cname}}?option=insert'" class="button1">Inserir</button>
              <button id="save" type="submit" form="form" class = "button1" {{butedit}}>Guardar</button>
-             <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/gform/{{cname}}?option=cancel'" class="button1">Cancelar</button>
-             <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/gform/{{cname}}?option=exit'" class="button1">Sair</button>
+             <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/gformusers/{{cname}}?option=cancel'" class="button1">Cancelar</button>
+             <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/gformusers/{{cname}}?option=exit'" class="button1">Sair</button>
              <br><br>
         {% else %}
 
@@ -31,7 +31,7 @@
                 {% for key in att %}
                     <label for="{{key}}">{{des[loop.index-1]}}:</label>
                     {% if key == '_code' %}
-                        <input type="text" disabled id="{{key}}" name="{{key}}_disabled" value="{{obj[key]}}" size="30"/>
+                        <input type="text"  id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
                         <input type="hidden" id="{{key}}" name="{{key}}" value="{{obj[key]}}"/>
                     {% else %}
                         <input type="text" {{butedit}} id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>

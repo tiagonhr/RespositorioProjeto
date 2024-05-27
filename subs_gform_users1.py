@@ -43,22 +43,15 @@ def gform(cname='', submenu="", grupo="",code = ""):
                 else:
                     code = request.form[cl.att[0]]  # Obtém o valor do formulário para o primeiro atributo (código)
 
+                # Cria um dicionário com os valores do formulário
                 form_data = {att: request.form[att] for att in cl.att}
+
+                # Cria um novo objeto usando os valores do formulário
                 obj = cl(**form_data)
+
+                # Insere o novo objeto na lista de objetos da classe
                 cl.insert(obj.user)
                 cl.last()
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 
         obj =cl.obj.get(code)
         if prev_option == 'insert' and option == 'save':

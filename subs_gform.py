@@ -31,7 +31,7 @@ def gform(cname='', submenu="", grupo="",code = ""):
     ulogin = session.get("user")
     
     if ulogin != None:
-        
+
         cl = eval(cname)
         butshow = "enabled"
         butedit = "disabled"
