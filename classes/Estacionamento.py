@@ -15,17 +15,17 @@ class Estacionamento(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 1
+    auto_number = 0
     nkey = 1
     
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_lugar','_matricula','_CodigoResidente']
+    att = ['_code', '_lugar','_matricula']
     # Class header title
     header = 'Estacionamento'
     # field description for use in, for example, in input form
-    des = ['Lugar número','matricula do Veiculo','Codigo do Residente']
+    des = ['Código Residente','Nº de Lugar','Matrícula']
     # Constructor: Called when an object is instantiated
-    def __init__(self, lugar,matricula,CodigoResidente):
+    def __init__(self,code, lugar,matricula):
         super().__init__()
         # Uncomment in case of auto number on
         if lugar == 'None':
@@ -38,15 +38,15 @@ class Estacionamento(Gclass):
         # Object attributes
         
         # Check the customer referential integrity
-        if CodigoResidente in Residente.lst:
+        if code in Residente.lst:
             self._lugar = lugar
             self._matricula = matricula
-            self._CodigoResidente = CodigoResidente
+            self._code = code
             # Add the new object to the Order list
-            Estacionamento.obj[lugar] = self
-            Estacionamento.lst.append(lugar)
+            Estacionamento.obj[code] = self
+            Estacionamento.lst.append(code)
         else:
-            print('CodigoResidente ', CodigoResidente, ' not found')
+            print('CodigoResidente ', code, ' not found')
 
        
 
@@ -60,10 +60,10 @@ class Estacionamento(Gclass):
     @property
     def matricula(self):
         return self._matricula
-    # CodigoResidente property getter method
+    # code property getter method
     @property
-    def CodigoResidente(self):
-        return self._CodigoResidente
+    def code(self):
+        return self._code
     
     @lugar.setter
     def lugar(self, lugar):
@@ -73,10 +73,11 @@ class Estacionamento(Gclass):
     @matricula.setter
     def matricula(self, matricula):
         self._matricula = matricula
-    # CodigoResidente property setter method
-    @CodigoResidente.setter
-    def CodigoResidente(self, CodigoResidente):
-        if CodigoResidente in Residente.lst:
-            self._CodigoResidente = CodigoResidente
+    # Code property setter method
+    
+    @code.setter
+    def code(self, code):
+        if code in Residente.lst:
+            self._code = code
         else:
-            print('CodigoResidente ', CodigoResidente, ' not found')
+            print('CodigoResidente ', code, ' not found')

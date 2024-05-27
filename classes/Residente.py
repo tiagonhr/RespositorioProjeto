@@ -20,7 +20,7 @@ class Residente(Gclass):
     # Class header title
     header = 'Residente'
     # field description for use in, for example, input form
-    des = ['ID Code','First Name','Last Name','Email Adress','Date of Birth','Occupation']
+    des = ['Código Residente','Primeiro Nome','Último Nome','Endereço de Email','Data de Nascimento','Ocupação']
     # Constructor: Called when an object is instantiated
     def __init__(self, code, fname, lname, email, dob, occupation):
         super().__init__()

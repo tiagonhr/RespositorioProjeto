@@ -21,7 +21,7 @@ class ReservaGinasio(Gclass):
     # Class header title
     header = 'Sessões do Ginasio'
     # field description for use in, for example, in input form
-    des = ['Codigo','Dia ','Aula','Foto']
+    des = ['Código','Dia ','Aula','Foto']
     # Constructor: Called when an object is instantiated
     def __init__(self, code, dia, aula,foto):
         super().__init__()

@@ -11,19 +11,17 @@ from classes.customer import Customer
 from classes.product import Product
 from classes.customerorder import CustomerOrder
 from classes.orderproduct import OrderProduct
-from classes.userlogin import Userlogin
+from classes.residente import residente
 
 from classes.gclass import Gclass
 prev_option = ""
 
-def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
+def residente(cname='', submenu="", code = "",user = "", grupo="",password =""):
     global prev_option
     ulogin=session.get("user")
 
     if (grupo == "admin"):
-        group = Userlogin.obj[ulogin].usergroup
-        if group != "admin":
-            Userlogin.current(ulogin)
+
         butshow = "enabled"
         butedit = "disabled"
         option = request.args.get("option")
@@ -32,51 +30,45 @@ def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
             butshow = "disabled"
             butedit = "enabled"
         elif option == "delete":
-            obj = Userlogin.current()
-            Userlogin.remove(obj.user)
-            if not Userlogin.previous():
-                Userlogin.first()
+            obj = residente.current()
+            residente.remove(obj.user)
+            if not residente.previous():
+                residente.first()
         elif option == "insert":
             butshow = "disabled"
             butedit = "enabled"
         elif option == 'cancel':
             pass
         elif prev_option == 'insert' and option == 'save':
-            obj = Userlogin(request.form["code"],request.form["user"],request.form["usergroup"], \
-                            Userlogin.set_password(request.form["password"]))
-            Userlogin.insert(obj.user)
-            Userlogin.last()
+            obj = residente.get(code)
+            residente.insert(obj.user)
+            residente.last()
         elif prev_option == 'edit' and option == 'save':
-            obj = Userlogin.current()
-            if group == "admin":
-                obj.usergroup = request.form["usergroup"]
-            if request.form["password"] != "":
-                obj.password = Userlogin.set_password(request.form["password"])
-                print(obj.password)
-            Userlogin.update(obj.user)
+            obj = residente.current()
+            
+            residente.update(obj.user)
         elif option == "first":
-            Userlogin.first()
+            residente.first()
         elif option == "previous":
-            Userlogin.previous()
+            residente.previous()
         elif option == "next":
-            Userlogin.nextrec()
+            residente.nextrec()
         elif option == "last":
-            Userlogin.last()
+            residente.last()
         elif option == 'exit':
             return render_template("index.html", ulogin=session.get("user"))
         prev_option = option
-        obj = Userlogin.current()
-        if option == 'insert' or len(Userlogin.lst) == 0:
+        obj = residente.current()
+        if option == 'insert' or len(residente.lst) == 0:
             user = ""
             usergroup = ""
             password = ""
             code = ""
         else:
-            code = obj.code
             user = obj.user
             usergroup = obj.usergroup
             password = ""
-        return render_template("userlogin.html", butshow=butshow, butedit=butedit, code = code,user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
+        return render_template("residente.html", butshow=butshow, butedit=butedit, user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
     
     elif grupo == "users":
         butshow = "enabled"
@@ -85,7 +77,7 @@ def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
 
         # Filtra pelo usuário fornecido
 
-        obj = Userlogin.obj.get(user)
+        obj = residente.obj.get(user)
 
         if not obj:
             return render_template("error.html", message="User not found.")
@@ -97,14 +89,14 @@ def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
             pass
         elif prev_option == 'edit' and option == 'save':
             if request.form["password"]:
-                obj.password = Userlogin.set_password(request.form["password"])
-            Userlogin.update(obj.user)
+                obj.password = residente.set_password(request.form["password"])
+            residente.update(obj.user)
         elif option == 'exit':
             return render_template("index.html", ulogin=session.get("user"))
 
         prev_option = option
 
-        if option == 'insert' or len(Userlogin.lst) == 0:
+        if option == 'insert' or len(residente.lst) == 0:
             user = ""
             usergroup = ""
             password = ""
@@ -115,7 +107,7 @@ def userlogin(cname='', submenu="", code = "",user = "", grupo="",password =""):
             code = obj.code
             password = ""
 
-        return render_template("userlogin.html", butshow=butshow, butedit=butedit, code=code, user=user, usergroup=usergroup, password=password, ulogin=session.get("user"), group=grupo)
+        return render_template("residente.html", butshow=butshow, butedit=butedit, code=code, user=user, usergroup=usergroup, password=password, ulogin=session.get("user"), group=grupo)
 
     else:
         return render_template("index.html", ulogin=ulogin)

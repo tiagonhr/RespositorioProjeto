@@ -20,9 +20,9 @@ class Userlogin(Gclass):
     # class attributes, identifier attribute must be the first one on the list
     att = ['_code', '_user','_usergroup','_password']
     # Class header title
-    header = 'Users'
+    header = 'Utilizadores'
     # field description for use in, for example, in input form
-    des = ['code','User','User group','Password']
+    des = ['Código Utilizador','Utilizador','Grupo','Password']
     username = ''
     # Constructor: Called when an object is instantiated
     def __init__(self,code , user, usergroup, password):
@@ -84,9 +84,3 @@ class Userlogin(Gclass):
         return passencrypted.decode()
     
     
-    @staticmethod
-    def find_by_code(code):
-        for user in Userlogin.lst:
-            if user.code == code:
-                return user
-        return None

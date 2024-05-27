@@ -23,7 +23,7 @@ class InscricaoGinasio(Gclass):
     # Class header title
     header = 'InscricaoGinasio'
     # field description for use in, for example, in input form
-    des = ['Codigo da Aula','Nome Inscrição','Tipo de Aula']
+    des = ['Código da Aula','Nome Inscrição','Tipo de Aula']
     # Constructor: Called when an object is instantiated
     def __init__(self, code_aula,nome,aula):
         super().__init__()

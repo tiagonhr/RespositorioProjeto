@@ -15,90 +15,82 @@
       {% else %}
         <li><a class="button" href="/logoff">Logoff</a></li>
 
-        {% if grupo == "admin" %}
-            <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
-            <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
-            <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
-            <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
-            <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>   
-            <li><a class="button" href="/Userlogin">Userlogin</a></li>
-            
-        {% else %}
-            <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
-            <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
-            <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
-            <li><a class="button" href="/submenu?subm=ResidenteAlugar">Alugar</a></li>
-            <li><a class="button" href="/submenu?subm=ReservaGinasio">ReservaGinasio</a></li>
-            <li><a class="button" href="/Userlogin">Userlogin</a></li>
-        {% endif %}
+        <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
+        <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
+        <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
+        <li><a class="button" href="/submenu?subm=Salas">Salas</a></li>
+        <li><a class="button" href="/submenu?subm=Ginasio">Ginasio</a></li>   
+        <li><a class="button" href="/Userlogin">Userlogin</a></li>
         <li><a class="button" style="color:lightblue">Utilizador : {{ulogin}}</a></li>
         
         <br><br>
-
-        {% if submenu == "Reserva" %}
-
-            <li><a class="button submenu" href="/gform/Reserva?option=''&subm=Reserva">Reserva form</a></li>
-            <li><a class="button submenu" href="/gformT/Reserva?option=''&subm=Reserva">Reserva Tabela(foto)</a></li>
-        {% endif %}
-
-        {% if submenu == "Estacionamento" %}
-            <li><a class="button submenu" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento form</a></li>
-            <li><a class="button submenu" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
-        {% endif %}
-
+        
         {% if submenu == "Residente" %}
            
             {% if grupo == "admin" %}
-                <li><a class="button submenu" href="/gform/Residente?option=''&subm=Residente">Residente form</a></li>
-                <li><a class="button submenu" href="/gformT/Residente?option=''&subm=Residente">Residente Tabela(foto)</a></li>
+                <li><a class="button submenu" href="/gform/Residente?option=''&subm=Residente">Dados de Residente</a></li>
+                <li><a class="button submenu" href="/gformT/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
                  
-             {% else %}
-                <li><a class="button submenu" href="/gform/Residente?option=''&subm=Residente">Residente form</a></li>
+            {% else %}
+                <li><a class="button submenu" href="/gformusers/Residente?option=''&subm=Residente">Dados de Residente</a></li>
+                <li><a class="button submenu" href="/gformTusers/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
         
+            {% endif %}
+        {% endif %}
+        
+        {% if submenu == "Reserva" %}
+            {% if grupo == "admin" %}
+                <li><a class="button submenu" href="/gform/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
+                <li><a class="button submenu" href="/gformT/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
+                 
+            {% else %}
+                <li><a class="button submenu" href="/gformusers/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
+                <li><a class="button submenu" href="/gformTusers/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
+            
+            {% endif %}
+        {% endif %}
+
+        {% if submenu == "Estacionamento" %}
+             {% if grupo == "admin" %}
+                 <li><a class="button submenu" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
+                 <li><a class="button submenu" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
+                  
+             {% else %}
+                 <li><a class="button submenu" href="/gformusers/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
+                 <li><a class="button submenu" href="/gformTusers/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
+             
              {% endif %}
         {% endif %}
 
-        {% if submenu == "ResidenteAlugar" %}
+        
+
+        {% if submenu == "Salas" %}
         
             {% if grupo == "admin" %}
-                <li><a class="button" href="/SalasComunsform?subm=SalasComuns">Inserir Aulas</a></li>
                 <li><a class="button" href="/gformT/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
                 <li><a class="button" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
-                <li><a class="button" href="/Alugar/mapa?option=''">Mapa Reservas de Salas Comuns</a></li>
-                
+                <li><a class="button" href="/Alugar/mapa?option=''">Calendário de Reservas</a></li>
+                <li><a class="button" href="/SalasComunsform?subm=SalasComuns">Inserir Salas</a></li>                
             {% else %}
-                <li><a class="button" href="/gformT/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
-                <li><a class="button" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
+                <li><a class="button" href="/gformTusers/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
+                <li><a class="button" href="/gformusers/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
                 <li><a class="button" href="/Alugar/mapa?option=''">Mapa Reservas de Salas Comuns</a></li>
             {% endif %}
          
         {% endif %}
         
-        {% if submenu == "ReservaGinasio" %}
-                    
-            {% if grupo == "admin" %}
-                <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">Inserir Aulas</a></li>
+        {% if submenu == "Ginasio" %}
+            {% if grupo == "admin" %}
                 <li><a class="button" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
                 <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
                 <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
-            
+                <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">Inserir Aulas</a></li>
             {% else %}
                 <li><a class="button" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
                 <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
                 <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
-            {% endif %}    
+            {% endif %}
         {% endif %}       
-                
-        {% if submenu == "order" %}
-            <li><a class="button" href="/subform/CustomerOrder_OrderProduct?option=''&subm=order">Order lines</a></li>
-            <li><a class="button" href="/order/mapa?option=''">Mapa encomendas</a></li>
-        {% endif %} 
-        
-        {% if submenu == "product" %}
-            <li><a class="button" href="/gform/Product?subm=product">Product</a></li>
-            <li><a class="button" href="/productform?subm=product">Product(foto)</a></li>
-
-        {% endif %}
               
       {% endif %}
     </ul>

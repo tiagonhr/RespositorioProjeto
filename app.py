@@ -39,6 +39,8 @@ app.config['UPLOAD'] = upload_folder
 
 import subs_login as lsub
 import subs_gform as gfsub
+import subs_gform_users as gfsubusers
+import subs_gformT_users as gfTsubusers
 import subs_gformT as gfTsub
 import subs_hform as gfhsub
 import subs_subform as gfsubsub
@@ -90,12 +92,29 @@ def gform(cname=''):
     grupo = Userlogin.obj[user].usergroup if user else None
     return gfsub.gform(cname,submenu, grupo,code)
 
+@app.route("/gformusers/<cname>", methods=["post","get"])
+def gformusers(cname=''):
+    submenu = request.args.get("subm")
+    user = session.get("user")
+    code = Userlogin.obj[user].code if user else None
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfsubusers.gform(cname,submenu, grupo,code)
+    
 @app.route("/gformT/<cname>", methods=["post","get"])
 def gformT(cname=''):
     submenu = request.args.get("subm")
     user = session.get("user")
+    code = Userlogin.obj[user].code if user else None
     grupo = Userlogin.obj[user].usergroup if user else None
-    return gfTsub.gformT(cname,submenu,grupo)
+    return gfTsub.gformT(cname,submenu,grupo,code)
+
+@app.route("/gformTusers/<cname>", methods=["post","get"])
+def gformTusers(cname=''):
+    submenu = request.args.get("subm")
+    user = session.get("user")
+    code = Userlogin.obj[user].code if user else None
+    grupo = Userlogin.obj[user].usergroup if user else None
+    return gfTsubusers.gformT(cname,submenu,grupo,code)
 
 @app.route("/hform/<cname>", methods=["post","get"])
 def hform(cname=''):
@@ -105,7 +124,6 @@ def hform(cname=''):
     return gfhsub.hform(cname,submenu,grupo)
 
 
-        
 @app.route("/subform/<cname>", methods=["post","get"])
 def subform(cname=""):
     submenu = request.args.get("subm")
@@ -144,9 +162,17 @@ def AlugarSalaComum():
     cname = ''
     return mapasub2.mapaAlugarform(app,cname,submenu)
 
-
 @app.route("/Userlogin", methods=["post","get"])
 def userlogin(cname = ""):
+    submenu = request.args.get("subm")
+    user = session.get("user")
+    grupo = Userlogin.obj[user].usergroup if user else None
+    code = Userlogin.obj[user].code if user else None
+    password = Userlogin.obj[user].password if user else None
+    return loginsub.userlogin(cname,submenu, code,user,grupo,password)
+
+@app.route("/Residente", methods=["post","get"])
+def residente(cname = ""):
     submenu = request.args.get("subm")
     user = session.get("user")
     grupo = Userlogin.obj[user].usergroup if user else None

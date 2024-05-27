@@ -23,7 +23,7 @@ class ResidenteAlugar(Gclass):
     # Class header title
     header = 'Alugar'
     # field description for use in, for example, in input form
-    des = ['code','Date','Residente code']
+    des = ['Código da Sala','Date','Código Residente']
     # Constructor: Called when an object is instantiated
     def __init__(self, code, date, customer_code):
         super().__init__()

@@ -17,7 +17,6 @@ prev_option = ""
 img = ""
 
 
-
 def productFoto(app,cname='',submenu=""):
     global img
     global prev_option

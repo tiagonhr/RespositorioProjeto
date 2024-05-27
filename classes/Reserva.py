@@ -18,13 +18,13 @@ class Reserva(Gclass):
     nkey = 1
     
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_numero','_tipologia','_CodigoResidente']
+    att = ['_code','_numero','_tipologia']
     # Class header title
     header = 'Reserva'
     # field description for use in, for example, in input form
-    des = ['Número do Quarto','Tipologia do Quarto','Codigo do Residente']
+    des = ['Código Residente', 'Número do Quarto','Tipologia do Quarto']
     # Constructor: Called when an object is instantiated
-    def __init__(self, numero,tipologia,CodigoResidente):
+    def __init__(self, code, numero,tipologia):
         super().__init__()
         # Uncomment in case of auto number on
         # if numero == 'None':
@@ -37,15 +37,15 @@ class Reserva(Gclass):
         # Object attributes
         
         # Check the customer referential integrity
-        if CodigoResidente in Residente.lst:
+        if code in Residente.lst:
             self._numero = numero
             self._tipologia = tipologia
-            self._CodigoResidente = CodigoResidente
+            self._code = code
             # Add the new object to the Order list
-            Reserva.obj[numero] = self
-            Reserva.lst.append(numero)
+            Reserva.obj[code] = self
+            Reserva.lst.append(code)
         else:
-            print('CodigoResidente ', CodigoResidente, ' not found')
+            print('code ', code, ' not found')
 
        
 
@@ -59,10 +59,10 @@ class Reserva(Gclass):
     @property
     def tipologia(self):
         return self._tipologia
-    # CodigoResidente property getter method
+    # code property getter method
     @property
-    def CodigoResidente(self):
-        return self._CodigoResidente
+    def code(self):
+        return self._code
     
     @numero.setter
     def numero(self, numero):
@@ -72,10 +72,11 @@ class Reserva(Gclass):
     @tipologia.setter
     def tipologia(self, tipologia):
         self._tipologia = tipologia
-    # CodigoResidente property setter method
-    @CodigoResidente.setter
-    def CodigoResidente(self, CodigoResidente):
-        if CodigoResidente in Residente.lst:
-            self._CodigoResidente = CodigoResidente
+    # code property setter method
+    @code.setter
+    def code(self, code):
+        if code in Residente.lst:
+            self._code = code
         else:
-            print('CodigoResidente ', CodigoResidente, ' not found')    
+            print('code ', code, ' not found')    
+            

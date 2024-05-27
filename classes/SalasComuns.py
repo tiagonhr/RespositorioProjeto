@@ -21,7 +21,7 @@ class SalasComuns(Gclass):
     # Class header title
     header = 'Salas Comuns'
     # field description for use in, for example, in input form
-    des = ['Codigo','Tipo','Foto']
+    des = ['Código','Tipo','Foto']
     # Constructor: Called when an object is instantiated
     def __init__(self, code, nome, foto):
         super().__init__()
