@@ -32,10 +32,11 @@ class InscricaoGinasio(Gclass):
             # self._nome = nometime.nome.fromisoformat(nome)
             self._code = code
             # Add the new object to the Order list
-            InscricaoGinasio.obj[code] = self
-            InscricaoGinasio.lst.append(code)
+            InscricaoGinasio.obj[code_aula] = self
+            InscricaoGinasio.lst.append(code_aula)
         else:
-            print('ReservaGinasio ', code_aula, ' não está na lista de aulas')
+            raise ValueError(f'Erro: ReservaGinasio {code_aula} não está na lista de aulas')
+
        
 
     # Object properties
