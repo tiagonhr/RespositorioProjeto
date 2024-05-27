@@ -4,6 +4,7 @@ from classes.ReservaGinasio import ReservaGinasio
 
 class InscricaoGinasio(Gclass):
     obj = dict()
+    obj1 = dict()
     lst = list()
     pos = 0
     sortkey = ''
@@ -33,6 +34,7 @@ class InscricaoGinasio(Gclass):
             self._code = code
             # Add the new object to the Order list
             InscricaoGinasio.obj[code_aula] = self
+            InscricaoGinasio.obj1[code] = self
             InscricaoGinasio.lst.append(code_aula)
         else:
             raise ValueError(f'Erro: ReservaGinasio {code_aula} não está na lista de aulas')

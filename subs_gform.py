@@ -47,6 +47,7 @@ def gform(cname='', submenu="", grupo="",code = ""):
             cl.insert(getattr(obj, cl.att[0]))
             cl.last()
         elif prev_option == 'edit' and option == 'save':
+
             obj = cl.current()
             # if auto_number = 1 the key stays the same
             for i in range(cl.auto_number,len(cl.att)):

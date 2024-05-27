@@ -31,7 +31,7 @@
                 {% for key in att %}
                     <label for="{{key}}">{{des[loop.index-1]}}:</label>
                     {% if key == '_code' %}
-                        <input type="text"  id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
+                        <input type="text" disabled id="{{key}}" name="{{key}}_disabled" value="{{obj[key]}}" size="30"/>
                         <input type="hidden" id="{{key}}" name="{{key}}" value="{{obj[key]}}"/>
                     {% else %}
                         <input type="text" {{butedit}} id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>

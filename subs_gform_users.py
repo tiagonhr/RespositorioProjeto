@@ -51,6 +51,8 @@ def gform(cname='', submenu="", grupo="",code = ""):
             cl.insert(getattr(obj, cl.att[0]))
             cl.last()
         elif prev_option == 'edit' and option == 'save':
+            if request.form[cl.att[0]] != getattr(obj, cl.att[0]):
+                return "O código fornecido não coincide com o código do objeto atual."
             for i in range(cl.auto_number, len(cl.att)):
                 att = cl.att[i]
                 setattr(obj, att, request.form[att])
