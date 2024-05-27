@@ -5,30 +5,23 @@ Created on Tue May 21 19:04:56 2024
 @author: tiagoneves
 """
 
-#import datetime
 from datetime import datetime
 
 from datetime import timedelta
-# Import the generic class
 from classes.gclass import Gclass
 
 
 
 class Alugar2Form(Gclass):
-    # Dictionary of objects
     obj = dict()
     lst = list()
     pos = 0
     sortkey = ''
     auto_number = 0
     
-    # class attributes, identifier attribute must be the first one on the list
     att = ['code','classEvents', 'selectedDiaHora']
-    # Class header title
     header = 'horario to form'
-    # field description for use in, for example, in input form
     des = ['code','classEvents', 'selectedDiaHora']
-    # Constructor: Called when an object is instantiated
     def __init__(self, code,classEvents, selectedDiaHora):
         #Uncomment in case of auto number on
         # if code == 'None':
@@ -48,56 +41,37 @@ class Alugar2Form(Gclass):
         
         self.config_horario()
         self.fillMatiz()
-        
-        
-        
 
-
-        # Add the new object to the Class_horario list
         Alugar2Form.obj[code] = self
         Alugar2Form.lst.append(code)
-#%% property
-    # Object properties
-    # getter methodes
-    # code property getter method
+#%% properties
+
     @property
     def code(self):
         return self._code
-    #classEvents property getter method
+
     @property
     def classEvents(self):
         return self._classEvents
-    # horaIni property getter method
    
-    # selectedDia property getter method
     @property
     def selectedDia(self):
         return self.selectedDiaHora.date()
-    # eventsbydiahora property getter method
+    
     @property
     def eventsdiahseleted(self):
         return self._eventsdiahseleted
     
-    
-    
-    
-   
 
 #%% setter
     
-    # setter methodes
-    # code property setter method
     @code.setter
     def code(self, code):
         self._code = code
-    # classEvents property setter method
+
     @classEvents.setter
     def classEvents(self, classEvents):
         self._classEvents = classEvents
-    # horaIni property setter method
-    
-   
-
 
 #%% def    
 
@@ -155,7 +129,6 @@ class Alugar2Form(Gclass):
             self.colunasdia.append(self.diaInicial+ timedelta(k))
             
              
-    # Fill matiz from class
     def fillMatiz(self):
         
           
@@ -215,12 +188,10 @@ class celulaform():
         self.codeevent = "None"
         self.texto = "" 
         
-    # codeevent property getter method
     @property
     def codeevent(self):
         return self._codeevent
     
-    # cor property getter method
     @property
     def cor(self):
         if self.nevents in self.cores.keys():
@@ -229,9 +200,6 @@ class celulaform():
             temp = self.cores[len(self.cores)-1]
         
         return temp
-    
-    
-    # codeevent property setter method
   
     @codeevent.setter
     def codeevent(self, codeevent):
