@@ -20,7 +20,7 @@
         <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=exit'" class="button1">Sair</button>
         <br><br>
         <form id="form" action="/Userlogin?option=save" method="post">
-            {% if usergroup == 'admin' %}
+            {% if group == 'admin' %}
                 <label for="code">Código:</label>
                 <input type="text" {{butedit}} id="code" name="code" value="{{code}}" size="40"/>
                 <br><br>
