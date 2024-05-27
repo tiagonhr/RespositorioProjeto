@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Customer order demo PCII</title>
+  <title>Customer Order Demo PCII</title>
+  <link href="/path/to/main.css" rel="stylesheet">
   {% block title %}
   {% endblock %}
 </head>
@@ -11,91 +12,81 @@
   <nav>
     <ul class="menu">
       {% if ulogin == None %}
-        <li><a class="button" href="/login">Login</a></li>   
+        <li><a class="button" href="/login">Login</a></li>
       {% else %}
         <li><a class="button" href="/logoff">Logoff</a></li>
-
         <li><a class="button" href="/submenu?subm=Residente">Residente</a></li>
         <li><a class="button" href="/submenu?subm=Reserva">Reservas</a></li>
         <li><a class="button" href="/submenu?subm=Estacionamento">Estacionamento</a></li>
         <li><a class="button" href="/submenu?subm=Salas">Salas</a></li>
-        <li><a class="button" href="/submenu?subm=Ginasio">Ginasio</a></li>   
+        <li><a class="button" href="/submenu?subm=Ginasio">Ginasio</a></li>
         <li><a class="button" href="/Userlogin">Userlogin</a></li>
         <li><a class="button" style="color:lightblue">Utilizador : {{ulogin}}</a></li>
-        
-        <br><br>
-        
+      {% endif %}
+    </ul>
+    {% if ulogin != None %}
+    <ul class="submenu">
         {% if submenu == "Residente" %}
-           
-            {% if grupo == "admin" %}
-                <li><a class="button submenu" href="/gform/Residente?option=''&subm=Residente">Dados de Residente</a></li>
-                <li><a class="button submenu" href="/gformT/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
-                 
-            {% else %}
-                <li><a class="button submenu" href="/gformusers/Residente?option=''&subm=Residente">Dados de Residente</a></li>
-                <li><a class="button submenu" href="/gformTusers/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
-        
-            {% endif %}
+          {% if grupo == "admin" %}
+            <li><a class="button center-content" href="/gform/Residente?option=''&subm=Residente">Dados de Residente</a></li>
+            <li><a class="button center-content" href="/gformT/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
+          {% else %}
+            <li><a class="button center-content" href="/gformusers/Residente?option=''&subm=Residente">Dados de Residente</a></li>
+            <li><a class="button center-content" href="/gformTusers/Residente?option=''&subm=Residente">Tabela de Residentes</a></li>
+          {% endif %}
         {% endif %}
-        
+
         {% if submenu == "Reserva" %}
-            {% if grupo == "admin" %}
-                <li><a class="button submenu" href="/gform/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
-                <li><a class="button submenu" href="/gformT/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
-                 
-            {% else %}
-                <li><a class="button submenu" href="/gformusers/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
-                <li><a class="button submenu" href="/gformTusers/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
-            
-            {% endif %}
+          {% if grupo == "admin" %}
+            <li><a class="button center-content" href="/gform/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
+            <li><a class="button center-content" href="/gformT/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
+          {% else %}
+            <li><a class="button center-content" href="/gformusers/Reserva?option=''&subm=Reserva">Dados de Reserva</a></li>
+            <li><a class="button center-content" href="/gformTusers/Reserva?option=''&subm=Reserva">Tabela de Reserva</a></li>
+          {% endif %}
         {% endif %}
 
         {% if submenu == "Estacionamento" %}
-             {% if grupo == "admin" %}
-                 <li><a class="button submenu" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
-                 <li><a class="button submenu" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
-                  
-             {% else %}
-                 <li><a class="button submenu" href="/gformusers/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
-                 <li><a class="button submenu" href="/gformTusers/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
-             
-             {% endif %}
+          {% if grupo == "admin" %}
+            <li><a class="button center-content" href="/gform/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
+            <li><a class="button center-content" href="/gformT/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
+          {% else %}
+            <li><a class="button center-content" href="/gformusers/Estacionamento?option=''&subm=Estacionamento">Estacionamento</a></li>
+            <li><a class="button center-content" href="/gformTusers/Estacionamento?option=''&subm=Estacionamento">Lugares de Estacionamento Ocupados</a></li>
+          {% endif %}
         {% endif %}
 
-        
-
         {% if submenu == "Salas" %}
-        
-            {% if grupo == "admin" %}
-                <li><a class="button" href="/gformT/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
-                <li><a class="button" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
-                <li><a class="button" href="/Alugar/mapa?option=''">Calendário de Reservas</a></li>
-                <li><a class="button" href="/SalasComunsform?subm=SalasComuns">Inserir Salas</a></li>                
-            {% else %}
-                <li><a class="button" href="/gformTusers/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
-                <li><a class="button" href="/gformusers/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
-                <li><a class="button" href="/Alugar/mapa?option=''">Mapa Reservas de Salas Comuns</a></li>
-            {% endif %}
-         
-        {% endif %}
-        
+          {% if grupo == "admin" %}
+            <li><a class="button center-content" href="/SalasComunsform?subm=SalasComuns">Inserir Salas</a></li>
+            <li><a class="button center-content" href="/gformT/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
+            <li><a class="button center-content" href="/gform/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
+            <li><a class="button center-content" href="/Alugar/mapa?option=''">Calendário de Reservas</a></li>
+          {% else %}
+            <li><a class="button center-content" href="/gformTusers/SalasComuns?option=''&subm=SalasComuns">Tabela de Salas Comuns</a></li>
+            <li><a class="button center-content" href="/gformusers/ResidenteAlugar?option=''&subm=ResidenteAlugar">Reserva de Salas</a></li>
+            <li><a class="button center-content" href="/Alugar/mapa?option=''">Mapa Reservas de Salas Comuns</a></li>
+          {% endif %}
+        {% endif %}
+
         {% if submenu == "Ginasio" %}
-            {% if grupo == "admin" %}
-                <li><a class="button" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
-                <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
-                <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
-                <li><a class="button" href="/ReservaGinasioform?subm=ReservaGinasio">Inserir Aulas</a></li>
-            {% else %}
-                <li><a class="button" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
-                <li><a class="button" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
-                <li><a class="button" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
-            {% endif %}
-        {% endif %}       
-              
-      {% endif %}
+          {% if grupo == "admin" %}
+            <li><a class="button center-content" href="/ReservaGinasioform?subm=ReservaGinasio">Inserir Aulas</a></li>
+            <li><a class="button center-content" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
+            <li><a class="button center-content" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
+            <li><a class="button center-content" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
+          {% else %}
+            <li><a class="button center-content" href="/gformT/ReservaGinasio?option=''&subm=ReservaGinasio">Tabela de Aulas</a></li>
+            <li><a class="button center-content" href="/gform/InscricaoGinasio?option=''&subm=InscricaoGinasio">Inscrição nas Aulas</a></li>
+            <li><a class="button center-content" href="/gformT/InscricaoGinasio?option=''&subm=InscricaoGinasio">Tabela de Inscrições</a></li>
+          {% endif %}
+        {% endif %}
     </ul>
+    {% endif %}
   </nav>
-  {% block content %}
-  {% endblock %}
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
 </html>

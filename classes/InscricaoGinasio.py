@@ -19,7 +19,7 @@ class InscricaoGinasio(Gclass):
     nkey = 1
     
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_code_aula','_nome','_aula']
+    att = ['_tcode_aula','_nome','_aula']
     # Class header title
     header = 'InscricaoGinasio'
     # field description for use in, for example, in input form
