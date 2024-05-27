@@ -182,7 +182,7 @@ class Alugar2Form(Gclass):
                 
                 dia = diaEvento
                 self.linha[c] = celulaform(l,c,dia,l)
-                self.linha[c].codeevent = evento.code 
+                self.linha[c].codeevent = evento.customer_code 
                 self.linha[c].texto = self.text_to_horario(evento)
                 self.semanaTree.append(self.linha)
           
@@ -190,7 +190,7 @@ class Alugar2Form(Gclass):
 
       
     def text_to_horario(self,evento):
-        texto = f"{evento.code} - {evento.date} - {evento.customer_code} "
+        texto = f"{evento._customer_code} - {evento.date} - {evento.room_code} "
        
         return texto
        
